@@ -68,6 +68,7 @@ a { color: var(--indigo); }
 }
 .button.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
 .muted { color: var(--muted); font-size: 14px; }
+.card .version { color: var(--muted); font: 13px/1.4 ui-monospace, Menlo, monospace; }
 
 ol, ul { padding-left: 22px; }
 li { margin: 6px 0; }
