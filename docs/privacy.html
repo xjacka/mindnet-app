@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MindNet — zásady ochrany soukromí</title>
+<meta name="description" content="Jaké údaje MindNet zpracovává, proč, kdo k nim má přístup a jak je smazat.">
+<link rel="icon" href="icon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a href="./"><img src="icon.png" alt=""><span class="wordmark">MindNet</span></a>
+    <nav>
+      <a href="./#instalace">Instalace</a>
+      <a href="./#podminky">Podmínky</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Zásady ochrany soukromí</h1>
+    <p class="muted">Platné od 9. října 2026 · veřejná beta</p>
+
+    <div class="note">
+      <p><strong>Ve zkratce:</strong> ukládáme tvůj účet a to, co v MindNetu vytvoříš. Text článků z webu
+        po zpracování neukládáme. Články zpracovává jazykový model u poskytovatelů uvedených níže.
+        Nic neprodáváme a nereklamujeme. Účet se vším obsahem smažeš sám v nastavení appky.</p>
+    </div>
+
+    <h2>Kdo údaje zpracovává</h2>
+    <p>Správcem je Lukáš Janeček, provozovatel MindNetu. Kontakt pro všechno, co se týká tvých údajů:
+      <a href="mailto:xjacka@gmail.com">xjacka@gmail.com</a>.</p>
+
+    <h2>Jaké údaje a proč</h2>
+    <div class="table-scroll">
+    <table>
+      <tr><th>Údaje</th><th>K čemu</th></tr>
+      <tr><td><strong>Účet</strong> — e-mail, jméno, přezdívka, profilový obrázek (z Googlu nebo vlastní), jazyk a nastavení appky</td>
+        <td>Přihlášení, zobrazení profilu ostatním, kterým to dovolíš, a příspěvky ve tvém jazyce.</td></tr>
+      <tr><td><strong>Co pošleš</strong> — odkazy na články, vložený text a soubory (PDF, EPUB), označené pasáže, komentáře, záložky, otázky k článkům, sledované weby a kanály</td>
+        <td>Z toho vznikají příspěvky. Vložený text a soubory se ukládají, protože jiný originál neexistuje.</td></tr>
+      <tr><td><strong>Co vznikne</strong> — příspěvky, překlady, shrnutí a jejich číselné otisky (embeddingy)</td>
+        <td>Feed, vyhledávání a doporučení podobného obsahu.</td></tr>
+      <tr><td><strong>Jak MindNet používáš</strong> — hvězdy, uložené, přečtené a skryté příspěvky, zájmy z úvodního nastavení</td>
+        <td>Řazení feedu a výběr podle toho, co tě zajímá. Z těchto signálů vzniká i krátký slovní popis tvých zájmů, který dostává model při výběru obsahu pro tebe.</td></tr>
+      <tr><td><strong>Lidé a skupiny</strong> — koho sleduješ, kdo sleduje tebe, skupiny, sdílení a veřejné odkazy</td>
+        <td>Sociální část: co komu ukázat. Příspěvek vidí jen ti, komu ho zpřístupníš.</td></tr>
+      <tr><td><strong>Zařízení</strong> — token pro oznámení</td>
+        <td>Posílání oznámení do telefonu.</td></tr>
+      <tr><td><strong>Klíče vlastního agenta</strong></td>
+        <td>Připojení tvého agenta, pokud ho používáš.</td></tr>
+    </table>
+    </div>
+    <p><strong>Text článků z webu se neukládá.</strong> Server si článek stáhne, zpracuje a uloží jen to,
+      co z něj vzniklo (příspěvky, krátký výtah, nadpis). Výjimkou je text stránky, kterou server stáhnout
+      nemůže a pošle ho tvoje zařízení: ten se drží nejvýš 30 dní.</p>
+    <p>Právním základem je plnění smlouvy — bez těchto údajů služba nefunguje — a u vylepšování služby
+      oprávněný zájem.</p>
+
+    <h2>Komu údaje předáváme</h2>
+    <p>Jen poskytovatelům, bez kterých MindNet nefunguje:</p>
+    <div class="table-scroll">
+    <table>
+      <tr><th>Poskytovatel</th><th>Co dělá</th><th>Co dostane</th></tr>
+      <tr><td>Supabase (data v Irsku, EU)</td><td>databáze, přihlášení, úložiště, server</td><td>všechny údaje výše</td></tr>
+      <tr><td>Google</td><td>přihlášení Googlem, oznámení do telefonu (Firebase)</td><td>přihlašovací údaje Google, token zařízení a obsah oznámení</td></tr>
+      <tr><td>Anthropic (Claude), Google (Gemini), Groq</td><td>jazykové modely, které články zpracovávají</td><td>text článku a hotové zadání včetně tvých nastavení a popisu zájmů</td></tr>
+      <tr><td>Tavily</td><td>vyhledávání článků na webu</td><td>hledaný dotaz</td></tr>
+      <tr><td>GitHub</td><td>stažení appky a kontrola nové verze</td><td>tvou IP adresu při stažení a dotazu na verzi</td></tr>
+    </table>
+    </div>
+    <p>Někteří z nich sídlí v USA; předávání se řídí standardními smluvními doložkami nebo rámcem
+      EU–US Data Privacy Framework podle jejich podmínek. Pokud připojíš <strong>vlastního agenta</strong>,
+      zadání s textem článků dostává poskytovatel tvého modelu podle tvé smlouvy s ním.</p>
+    <p>Údaje neprodáváme a nepoužíváme k reklamě.</p>
+
+    <h2>Jak dlouho</h2>
+    <ul>
+      <li>Účet a tvůj obsah, dokud účet nesmažeš.</li>
+      <li>Nedotčené příspěvky ze sledovaných zdrojů a nikdy neotevřené články ze seznamu ke čtení 30 dní.
+        Lhůty najdeš v nastavení appky v sekci Uchovávání dat.</li>
+      <li>Sdílená mezipaměť zpracovaných článků (výtah, překlady) nepatří jednomu účtu; co na ni nic
+        neodkazuje, maže denní úklid.</li>
+    </ul>
+
+    <h2>Tvoje práva</h2>
+    <p>Máš právo na přístup ke svým údajům, jejich opravu, výmaz, omezení zpracování, přenositelnost a právo
+      vznést námitku. <strong>Účet smažeš sám</strong> v nastavení appky — smaže se profil a všechno, co na
+      něm visí, včetně příspěvků, které jsi někomu nasdílel. Ostatní napiš na
+      <a href="mailto:xjacka@gmail.com">xjacka@gmail.com</a>. Stížnost můžeš podat u Úřadu pro ochranu
+      osobních údajů (<a href="https://uoou.gov.cz">uoou.gov.cz</a>).</p>
+
+    <h2>Rozšíření pro prohlížeč</h2>
+    <p>Rozšíření čte stránku jen ve chvíli, kdy ho otevřeš nebo použiješ z nabídky pravého tlačítka, a jen
+      tu, na které jsi. Pošle název, adresu, označenou pasáž a případně text stránky — nic na pozadí.
+      Přihlášení drží v úložišti prohlížeče, heslo neukládá.</p>
+
+    <h2>Změny</h2>
+    <p>Když se tyhle zásady změní, aktualizujeme datum nahoře a o podstatné změně dáme vědět v appce.</p>
+  </main>
+
+  <footer>
+    MindNet · <a href="./">Úvod</a> · <a href="https://github.com/xjacka/mindnet-app">GitHub</a>
+  </footer>
+</div>
+</body>
+</html>

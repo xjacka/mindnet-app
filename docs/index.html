@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MindNet — veřejná beta</title>
+<meta name="description" content="Vhoď článek, který nemáš čas přečíst. Rozpadne se na pár krátkých příspěvků — ve tvém jazyce a podle toho, co tě zajímá.">
+<link rel="icon" href="icon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a href="./"><img src="icon.png" alt=""><span class="wordmark">MindNet</span></a>
+    <nav>
+      <a href="#instalace">Instalace</a>
+      <a href="#agent">Vlastní agent</a>
+      <a href="privacy.html">Soukromí</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Vhoď článek, který nemáš čas přečíst.</h1>
+    <p class="lead">Rozpadne se na pár krátkých příspěvků — ve tvém jazyce a podle toho, co tě zajímá.
+      Pošleš ho z telefonu nebo z prohlížeče a za chvíli ho máš ve feedu.</p>
+    <p><span class="badge">Veřejná beta</span></p>
+
+    <div class="cards" id="instalace">
+      <div class="card">
+        <h3>Android</h3>
+        <p>Appka pro telefon. Článek do ní pošleš přes Sdílet z prohlížeče nebo jiné appky.</p>
+        <a class="button" href="https://github.com/xjacka/mindnet-app/releases/latest/download/mindnet.apk">Stáhnout APK</a>
+      </div>
+      <div class="card">
+        <h3>Rozšíření pro Chrome</h3>
+        <p>Pošle článek nebo označenou pasáž z prohlížeče na počítači. Vyzkoušené v Chrome.</p>
+        <a class="button" href="https://github.com/xjacka/mindnet-app/releases/latest/download/mindnet-extension.zip">Stáhnout rozšíření</a>
+      </div>
+    </div>
+    <p class="muted">Obojí je ze stejného <a href="https://github.com/xjacka/mindnet-app/releases/latest">posledního vydání</a>.
+      Na iPhone zatím appka není.</p>
+
+    <h2>Instalace na Android</h2>
+    <ol>
+      <li>V telefonu otevři <a href="https://github.com/xjacka/mindnet-app/releases/latest/download/mindnet.apk">odkaz na APK</a> a stáhni ho.</li>
+      <li>Otevři stažený soubor. Android se zeptá, jestli smí prohlížeč instalovat aplikace — povol to
+        (<strong>Instalovat neznámé aplikace</strong>).</li>
+      <li>Google Play Protect může upozornit, že appku nezná: MindNet zatím není v Google Play.
+        Zvol <strong>Další podrobnosti → Přesto nainstalovat</strong>.</li>
+      <li>Přihlas se Googlem nebo e-mailem.</li>
+    </ol>
+    <p>Když vyjde nová verze, appka to sama oznámí pruhem pod hlavičkou. Stačí klepnout na
+      <strong>Stáhnout</strong> a nainstalovat ji přes starou — nic se neztratí.</p>
+
+    <h2>Instalace rozšíření</h2>
+    <p>Rozšíření zatím není v Chrome Web Storu, takže se instaluje z rozbalené složky:</p>
+    <ol>
+      <li>Stáhni <a href="https://github.com/xjacka/mindnet-app/releases/latest/download/mindnet-extension.zip">zip s rozšířením</a>
+        a rozbal ho tam, kde může složka <code>mindnet-extension</code> natrvalo zůstat — prohlížeč ji čte z disku
+        při každém spuštění. Složka Stažené soubory, kterou občas promazáváš, k tomu není dobrá.</li>
+      <li>Otevři <code>chrome://extensions</code> a vpravo nahoře zapni <strong>Režim pro vývojáře</strong>.</li>
+      <li>Klikni na <strong>Načíst rozbalené</strong> a vyber složku <code>mindnet-extension</code>.</li>
+      <li>Připni si ikonu MindNetu vedle adresního řádku, otevři ji a přes ⚙ se přihlas — stejným účtem jako v appce.</li>
+    </ol>
+    <p><strong>Aktualizace:</strong> když je venku nová verze, ukáže se v okně rozšíření štítek
+      <em>Nová verze</em>. Stáhni nový zip, rozbal ho <strong>přes starou složku</strong> a v
+      <code>chrome://extensions</code> u MindNetu klikni na šipku pro obnovení. Přihlášení zůstane.</p>
+
+    <h2 id="agent">Vlastní agent</h2>
+    <p>Články zpracovává jazykový model. Pokud máš vlastní předplatné — třeba Claude — může tvoje články
+      zpracovávat tvůj vlastní agent: nečekáš na nikoho, nepočítá se ti to do denního stropu a model si
+      vybereš sám.</p>
+    <ol>
+      <li>V appce otevři nastavení účtu → <strong>Vlastní agent</strong> a vytvoř klíč.
+        Appka ti rovnou ukáže příkaz pro Claude Code s adresou serveru i klíčem.</li>
+      <li>Agentovi dej skill <a href="https://github.com/xjacka/mindnet-app/tree/main/skills/zpracuj-clanky"><code>zpracuj-clanky</code></a>
+        — popisuje, jak články vyzvedávat a odpovídat na zadání.</li>
+      <li>V nastavení zvol, že tvoje články zpracovává vlastní agent.</li>
+    </ol>
+    <p class="muted">Agent přes MCP vidí jen tvoje články a zadání. Text článku tím odchází k poskytovateli
+      tvého modelu.</p>
+
+    <h2 id="podminky">Podmínky bety</h2>
+    <ul>
+      <li>MindNet je ve vývoji a zdarma. Funkce se mění, něco se může rozbít a beta může skončit.</li>
+      <li>Každý účet má denní strop zpracovaných článků; co se nevejde, zpracuje se další den.</li>
+      <li>Neposílej do MindNetu nic, co bys nesměl sdílet s poskytovateli služeb uvedenými v
+        <a href="privacy.html">zásadách ochrany soukromí</a> — text článků prochází jazykovým modelem.</li>
+      <li>Za obsah, který pošleš nebo sdílíš s ostatními, odpovídáš ty.</li>
+      <li>Účet i všechno, co v něm je, smažeš kdykoli v nastavení appky.</li>
+    </ul>
+
+    <h2>Kontakt</h2>
+    <p>Chyby, nápady a dotazy piš na <a href="mailto:xjacka@gmail.com">xjacka@gmail.com</a>
+      nebo do <a href="https://github.com/xjacka/mindnet-app/issues">issues na GitHubu</a>.</p>
+  </main>
+
+  <footer>
+    MindNet · <a href="privacy.html">Zásady ochrany soukromí</a> · <a href="https://github.com/xjacka/mindnet-app">GitHub</a>
+  </footer>
+</div>
+</body>
+</html>
