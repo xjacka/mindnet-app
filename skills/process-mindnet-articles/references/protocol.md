@@ -110,6 +110,7 @@ The key is therefore composed from **stable inputs**, not from the prompt:
 | `translate` | `job_id \| translate \| fragment ordinal \| target language \| [policy \|] sha256(body)` — the policy segment only when it is not the default `keep_common` |
 | `summary` | `job_id \| summary \| source_id \| language` |
 | `genre` | `job_id \| genre \| source_id \| classifier version` |
+| `file` | `job_id \| file \| source_id \| sha256(the reader's folder list)` — a changed folder list is a new request, because the answer is a number in that list |
 | `fragment` from Discover | `discovery:<discovery_source_id> \| fragment \| source_id \| language \| prompt_version`, `job_id` is `null`, `lane` is `public` |
 | outside the queue | `kind \| sha256(prompt)` |
 

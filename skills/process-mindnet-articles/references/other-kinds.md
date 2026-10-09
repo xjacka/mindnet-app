@@ -187,6 +187,33 @@ it is interesting“ is gone — it produced filler. No evaluation, no
 addressing the reader, no questions. For unreadable text or a page that
 is not an article: one sentence about what the page contains.
 
+## `file` — folder for a saved article (`file.v1`, role `light`)
+
+Only for an article the reader saved themselves and did not file; it
+comes in the same round as `summary`. Input: the reader's folders as
+numbered paths („AI › Agents“) with up to three titles already filed in
+each, and the article's title, site, text type and the main points of its
+cards (not the article text). Output: `{ "subject": "…", "folder": 3,
+"confidence": 0.9, "reason": "…" }`; `folder: 0` = none.
+
+What the code does with the answer (`fileArticle` in
+`packages/pipeline/src/filing.ts`, ADR-0021):
+
+| check | consequence |
+|---|---|
+| `folder` not an integer from the list | **silently** nothing is filed |
+| `folder: 0` or `confidence` under **0.7** | nothing is filed, the article stays in the inbox |
+| the reader filed or unfiled the article meanwhile | your answer is dropped — the hand wins |
+
+The article goes into the folder **straight away**, without the reader
+confirming it; the card in Articles marks it as filed automatically. So
+**a wrong folder is worse than none**: answer 0 when two folders fit
+equally or when nothing holds the article's subject. Decide by the
+subject, not the form — a survey of Rust developers is about Rust, not
+„research“ — and by the example titles more than by the folder name,
+which is the reader's shorthand and may be in another language. You
+cannot create a folder; only the batch „Protřídit“ proposes new ones.
+
 ## `genre` — text type (`genre.v2`, earlier `genre.v1`; role `light`)
 
 Output: `{ "genre": "…", "confidence": 0.9, "reason": "…" }`. `genre`

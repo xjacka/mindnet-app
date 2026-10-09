@@ -88,8 +88,8 @@ time is (answer before the request's `answer_by`: 90 minutes from
 
 - **Write `fragment` on Opus.** It is the only step where the model
   decides what from the article will exist at all; everything else only
-  assembles from it. `select`, `terms`, `translate` and `summary` either
-  model handles.
+  assembles from it. `select`, `terms`, `translate`, `summary` and `file`
+  either model handles.
 - **Into `model` write the id of the model that wrote the answer**
   (`claude-opus-5`, `claude-sonnet-5`), not the one that checked it. The
   server records it on the post and the signature must tell the truth.
@@ -169,7 +169,7 @@ time is (answer before the request's `answer_by`: 90 minutes from
 moment you answer one of its steps (ADR-0020): it runs the job at once,
 composes the next prompt and hands it back in the same `answer` call.
 Nothing waits for a queue tick, so the four or five rounds of an article
-(`genre` → `fragment` → `select` → `terms` + `summary` → `translate` × N)
+(`genre` → `fragment` → `select` → `terms` + `summary` + `file` → `translate` × N)
 follow one another as fast as you write them.
 
 1. `claim_article` → `{ job_id, requests: [...] }`, or `{ empty: true }`
@@ -362,6 +362,7 @@ card only in one article.
 | `terms` | `terms.v1` | article terminology for translation: what to do with technical terms by the reader's policy; a glossary for every card of the thread | same — **handle first**, the thread's translations come only after it |
 | `translate` | `translate.v3` (earlier `v2`) | translate a post with its blocks, by the glossary and the terminology policy; answer `{ draft, final }` | same |
 | `summary` | `summary.v2` (earlier `v1`) | two to three sentences „what it is about“ for the reader | same |
+| `file` | `file.v1` | pick one of the reader's existing folders for an article they saved, or none | same |
 | `snippet`, `translate-article`, `ask`, `pick`, `compile-instruction`, `suggest-instruction` | as the prompt says | follow the prompt; acceptance rules are there | same |
 | anything else | — | answer by the prompt and note in the report that it is a new kind | |
 
@@ -431,7 +432,7 @@ calques („práce útočníka je…“, „vyvážit A s B“) in four of them,
 to fix. Check dashes mechanically yourself in any runtime: the GPT
 proofreader missed an em dash in the test of 7 October.
 
-**For `select`, `terms` and `summary`** run no extra check: the check is
+**For `select`, `terms`, `summary` and `file`** run no extra check: the check is
 short (word band, no new figure or name, no punchline; glossary follows
 the policy) and you manage it yourself.
 
