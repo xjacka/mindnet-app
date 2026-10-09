@@ -8,6 +8,7 @@ Website: **https://xjacka.github.io/mindnet-app/** ([English](https://xjacka.git
 |---|---|
 | Android | [mindnet.apk](https://github.com/xjacka/mindnet-app/releases/latest/download/mindnet.apk) |
 | Chrome extension | [mindnet-extension.zip](https://github.com/xjacka/mindnet-app/releases/latest/download/mindnet-extension.zip) |
+| Web app | [xjacka.github.io/mindnet-app/app/](https://xjacka.github.io/mindnet-app/app/) |
 
 ---
 
@@ -30,6 +31,13 @@ versions are under [Releases](https://github.com/xjacka/mindnet-app/releases).
 
 The app announces new versions itself. Install them over the old one;
 nothing gets lost.
+
+### Web app
+
+The same app in your browser, nothing to install:
+**https://xjacka.github.io/mindnet-app/app/**. Sign in with the same
+account as on your phone. Notifications and sharing into the app are
+Android only.
 
 ### Chrome extension
 
@@ -86,6 +94,12 @@ v [Releases](https://github.com/xjacka/mindnet-app/releases).
 
 Na novou verzi upozorní appka sama. Instaluje se přes starou verzi a nic
 se při tom neztratí.
+
+### Web
+
+Tatáž appka v prohlížeči, bez instalace:
+**https://xjacka.github.io/mindnet-app/app/**. Přihlas se stejným účtem
+jako v telefonu. Notifikace a sdílení do appky umí jen Android.
 
 ### Rozšíření pro Chrome
 
