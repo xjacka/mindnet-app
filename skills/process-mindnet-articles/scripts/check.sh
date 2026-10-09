@@ -50,10 +50,13 @@ if [ -z "$slot_fd" ]; then
 fi
 
 # 1) Primary path: platform sub-agent (judge.py without --direct).
-if python3 "$S" "$@"; then
+# `rc` straight from the call: after `if cmd; then …; fi` without an else,
+# `$?` is the exit status of the `if` itself, which is 0.
+python3 "$S" "$@"
+rc=$?
+if [ "$rc" -eq 0 ]; then
   exit 0
 fi
-rc=$?
 exec {slot_fd}>&-   # release the slot before the fallback
 echo "check.sh: platform spawn failed (rc=$rc) → fallback to --direct" >&2
 
