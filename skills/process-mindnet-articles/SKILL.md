@@ -356,7 +356,7 @@ card only in one article.
 | `kind` | `prompt_version` | What it asks of you | Details |
 |---|---|---|---|
 | `fragment` | `fragment.v15-<style>` / `-<style>-<genre>` (earlier `v14`) | Phase A: a thread that stands in for the article, in the article's language; the answer starts with an `outline`; several rounds with checks | [references/phase-a.md](references/phase-a.md) — read **always** before the first fragment of a run |
-| `select` | `select.v4` (earlier `v3`, `v2`, `v1`) | Phase B: pick from ready candidates for the reader and rewrite into their length and tone; the prompt is English, the output language is the candidates' | [references/other-kinds.md](references/other-kinds.md) |
+| `select` | `select.v5` (earlier `v4`, `v3`, `v2`, `v1`) | Phase B: pick from ready candidates for the reader, rewrite into their length and tone, and since v5 say how close each pick is to the reader (`fit`); the prompt is English, the output language is the candidates' | [references/other-kinds.md](references/other-kinds.md) |
 | `portrait` | `portrait.v1` | the reader's portrait: what interests them and what does not, from signals in the app | same |
 | `genre` | `genre.v2` (earlier `v1`) | determine the text type (news, essay, review…); the server composes Phase A by it | same — **handle first**, see below |
 | `terms` | `terms.v1` | article terminology for translation: what to do with technical terms by the reader's policy; a glossary for every card of the thread | same — **handle first**, the thread's translations come only after it |

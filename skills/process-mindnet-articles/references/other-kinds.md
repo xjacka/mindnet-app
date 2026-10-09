@@ -4,7 +4,7 @@ The prompt is in `prompt`. Here is what is not visible in it: **how exactly
 the code accepts or discards the answer** — mostly silently, without an
 error, so you would not learn it otherwise.
 
-## `select` — Phase B (`select.v4`, earlier `v3`, `v2`; role `light`)
+## `select` — Phase B (`select.v5`, earlier `v4`, `v3`, `v2`; role `light`)
 
 Since v4 the prompt is English (v3 was the same content in Czech; the
 candidate field `pod_textem` became `below_text` and the element labels are
@@ -16,7 +16,17 @@ you rewrite — `below_text` — the elements that stay under it unchanged —,
 `type`, `topics`, `standalone_value`, `terms`), a count `take`, target
 length in words, tone, term explanation, the reader's interests, possibly
 the watched source's instruction, the reader's own instruction and their
-portrait. Output: `{ "picked": [{ "index": 0, "body": "…" }] }`.
+portrait. Output: `{ "picked": [{ "index": 0, "body": "…", "fit": 0.7 }] }`.
+
+**`fit` (since v5)** is how much this reader will care about the pick, 0 to
+1, judged from the portrait and interests — not the candidate's general
+quality, which is already known. The feed orders the reader's own posts by
+it **across articles** (ADR-0022), so keep the scale comparable from one
+article to the next: 0.9–1 squarely in what they follow closely, 0.6–0.8 an
+area they care about, 0.4–0.5 nothing known for or against, 0.1–0.3 picked
+only to fill the count. Do not give every card of a saved article 0.9 —
+that flattens the feed back to what the old heuristic did. `fit` belongs to
+the choice, not the text: it stays even when your rewrite is discarded.
 
 What the code does with each `picked` item (`selectAndFormulate` in
 `packages/pipeline/src/fragment.ts`):
@@ -24,6 +34,7 @@ What the code does with each `picked` item (`selectAndFormulate` in
 | check | consequence |
 |---|---|
 | `index` out of range or twice | the item is skipped |
+| `fit` missing, not a number, or outside 0..1 | no `fit` is stored; the feed falls back to matching the reader's topics |
 | `body` has fewer than `max(12, target − 15)` or more than `target + 15` words | the rewrite is **silently discarded**, the original candidate is used |
 | the rewrite contains a figure (except integers up to 12 without a unit) or a proper name that is not in the candidate (`addsFacts`) | the same |
 | the rewrite repeats an element under the text (a quote, bullet items, the note) | the same |
