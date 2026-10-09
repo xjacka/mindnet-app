@@ -77,6 +77,20 @@ code {
   font: 14px ui-monospace, Menlo, monospace; background: var(--surface); border: 1px solid var(--line-soft);
   border-radius: 3px; padding: 1px 5px; word-break: break-word;
 }
+.cmd {
+  display: flex; align-items: center; gap: 8px; margin: 8px 0;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 6px 6px 6px 12px;
+}
+.cmd code {
+  flex: 1; min-width: 0; background: none; border: 0; padding: 0;
+  white-space: nowrap; overflow-x: auto; word-break: normal;
+}
+.cmd .copy {
+  flex: none; min-height: 32px; padding: 4px 10px; cursor: pointer;
+  font: 600 13px system-ui, -apple-system, "Segoe UI", sans-serif; color: var(--ink);
+  background: var(--paper); border: 1px solid var(--line); border-radius: 4px;
+}
+.cmd .copy:hover { border-color: var(--ink2); }
 .note {
   border-left: 3px solid var(--indigo); background: var(--surface); padding: 10px 14px; border-radius: 0 4px 4px 0;
 }

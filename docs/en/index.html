@@ -91,11 +91,15 @@
     <ol>
       <li>In the app, open account settings → <strong>Your own agent</strong> and create a key. The app
         shows a command that installs the MindNet plugin with that key — paste it into a terminal.</li>
-      <li>Or right in Claude Code: <code>/plugin marketplace add xjacka/mindnet-app</code>
-        and <code>/plugin install mindnet@mindnet-app</code>. If it does not ask for the key itself,
-        enter it with <code>/plugin configure mindnet@mindnet-app</code>. The
-        <a href="claude-cli://open?q=Install%20the%20MindNet%20plugin%20for%20me%3A%20in%20the%20shell%20run%20claude%20plugin%20marketplace%20add%20xjacka%2Fmindnet-app%20and%20then%20claude%20plugin%20install%20mindnet%40mindnet-app.%20Do%20not%20ask%20me%20for%20the%20key.%20At%20the%20end%20remind%20me%20to%20enter%20the%20key%20from%20the%20app%20myself%20with%20%2Fplugin%20configure%20mindnet%40mindnet-app%2C%20then%20run%20%2Freload-plugins%20and%20%2Fmindnet%3Asetup.">Open in Claude Code</a> button does the same once you have Claude Code.</li>
-      <li>Run <code>/mindnet:setup</code>. It checks the connection and, if you want, sets up regular
+      <li>Or right in Claude Code, one command after the other:
+        <div class="cmd"><code>/plugin marketplace add xjacka/mindnet-app</code><button type="button" class="copy">Copy</button></div>
+        <div class="cmd"><code>/plugin install mindnet@mindnet-app</code><button type="button" class="copy">Copy</button></div>
+        If it does not ask for the key itself, enter it like this:
+        <div class="cmd"><code>/plugin configure mindnet@mindnet-app</code><button type="button" class="copy">Copy</button></div>
+        The <a href="claude-cli://open?q=Install%20the%20MindNet%20plugin%20for%20me%3A%20in%20the%20shell%20run%20claude%20plugin%20marketplace%20add%20xjacka%2Fmindnet-app%20and%20then%20claude%20plugin%20install%20mindnet%40mindnet-app.%20Do%20not%20ask%20me%20for%20the%20key.%20At%20the%20end%20remind%20me%20to%20enter%20the%20key%20from%20the%20app%20myself%20with%20%2Fplugin%20configure%20mindnet%40mindnet-app%2C%20then%20run%20%2Freload-plugins%20and%20%2Fmindnet%3Asetup.">Open in Claude Code</a> button does the same once you have Claude Code.</li>
+      <li>Run the setup:
+        <div class="cmd"><code>/mindnet:setup</code><button type="button" class="copy">Copy</button></div>
+        It checks the connection and, if you want, sets up regular
         processing: a scheduled task in the Claude desktop app, or <code>/loop</code> or a background
         job in a terminal.</li>
       <li>In the app's settings, choose that your articles are processed by your own agent.</li>
@@ -104,8 +108,9 @@
       model processes the article, so nothing gets stuck.</p>
 
     <h3>Another agent</h3>
-    <p>Codex CLI, Cursor and others: add an HTTP MCP server with the address from the app and the header
-      <code>Authorization: Bearer mn_agent_…</code>, and give the agent the skill
+    <p>Codex CLI, Cursor and others: add an HTTP MCP server with the address from the app and the header</p>
+    <div class="cmd"><code>Authorization: Bearer mn_agent_…</code><button type="button" class="copy">Copy</button></div>
+    <p>(your key in place of <code>mn_agent_…</code>), and give the agent the skill
       <a href="https://github.com/xjacka/mindnet-app/tree/main/plugins/mindnet/skills/process-mindnet-articles"><code>process-mindnet-articles</code></a> — it describes how to pick up
       articles and answer their prompts.</p>
     <p class="muted">Over MCP the agent sees only your articles and prompts. The article text goes to your
@@ -131,5 +136,6 @@
   </footer>
 </div>
 <script src="../version.js" defer></script>
+<script src="../copy.js" defer></script>
 </body>
 </html>
