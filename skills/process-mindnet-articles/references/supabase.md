@@ -11,7 +11,7 @@ If you are a reader's own agent connected through the MindNet MCP
 server, **this file does not concern you**: you have no database access
 and need none. Read SKILL.md and stop here.
 
-Everything else in SKILL.md — rounds and subagents, the common rules,
+Everything else in SKILL.md — the runtime, rounds and checks, the common rules,
 the request kinds, the gate, the report — holds for the system agent
 unchanged. Only the four actions below are different.
 

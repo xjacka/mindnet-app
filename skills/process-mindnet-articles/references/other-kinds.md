@@ -160,10 +160,11 @@ target grammar (Apollo → Apolla, not Apolloho), keep agreement in long
 sentences, put the new information at the end of the sentence, prefer
 verbs to nominal phrases, keep the field's terms as the glossary says —
 but the sentence around them entirely in the target language. After the
-translation run the empty-context proofreader on GPT (SKILL.md, „Checks
-on OpenAI“, `--schema proofread`): it gets only
-your translation and reports foreign words and errors; fix `final` body
-and blocks and do not repeat the check.
+translation run the proofreader (SKILL.md, „The checks“): it gets only
+your translation and reports foreign words and errors — on DAM an
+empty-context GPT call (`--schema proofread`, runtime-dam.md), in a plain
+harness your own pass (runtime-plain.md); fix `final` body and blocks and
+do not repeat the check.
 
 Keep: the meaning and roughly the length; the block structure (kind,
 order, count); the figures in `value` and `series` unchanged (only rewrite

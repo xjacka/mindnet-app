@@ -1,7 +1,11 @@
 # Onboarding: the scheduled jobs
 
-How an own agent on a platform with scheduled jobs sets itself up to
-process the reader's queue without anyone starting it (ADR-0020).
+**DAM only** ([runtime-dam.md](runtime-dam.md)). A plain harness has no
+scheduled jobs and does not run this file
+([runtime-plain.md](runtime-plain.md)).
+
+How an own agent on DAM sets itself up to process the reader's queue
+without anyone starting it (ADR-0020).
 
 ## The shape: one session per article, in parallel (re-tested 8 October 2026)
 
@@ -145,8 +149,8 @@ start any session or schedule yourself.
    then `claim_article` with {"job": job_id}; waiting, done, failed → the
    article is over.
 4. GPT checks (extractor, cold reader, fidelity reviewer, translate
-   proofreader) go through `scripts/check.sh` (SKILL.md „Checks on
-   OpenAI“). It shares four sandbox slots across all sessions of the pod
+   proofreader) go through `scripts/check.sh` (references/runtime-dam.md,
+   „Checks on OpenAI“). It shares four sandbox slots across all sessions of the pod
    and goes direct when they are taken. For `translate` use
    CHECK_DIRECT=1. The answer's `model` field stays the writer's id.
 5. Keep to answer_by. When the article is over, end. Do not take another

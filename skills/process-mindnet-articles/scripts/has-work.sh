@@ -120,12 +120,10 @@ if [ -n "${SUPABASE_URL:-}" ] && [ -n "${SUPABASE_SERVICE_ROLE_KEY:-}" ]; then
     date -u -d "$1 minutes ago" +%Y-%m-%dT%H:%M:%SZ 2>/dev/null \
       || date -u -v-"$1"M +%Y-%m-%dT%H:%M:%SZ
   }
-  # Expired lease: fragment after 20 minutes, other kinds after 5 — the same
-  # numbers as the SQL above; keep them in step when the lease changes.
-  lease_f="$(minutes_ago 20)"; lease_o="$(minutes_ago 5)"
-  # The last moment a row can still meet the deadline: 45 min minus the kind's
-  # reserve (fragment 18 → 27, other kinds 3 → 42).
-  deadline_f="$(minutes_ago 27)"; deadline_o="$(minutes_ago 42)"
+  # Expired lease: fragment after 20 minutes, other kinds after 5.
+  lease_f="$(minutes_ago 15)"; lease_o="$(minutes_ago 5)"
+  # The last moment a row can still meet the deadline (45 min minus the kind's maximum).
+  deadline_f="$(minutes_ago 31)"; deadline_o="$(minutes_ago 42)"
   # PostgREST joins repeated `or=` with AND, so this is the same condition
   # as the `case` in references/supabase.md — just split into two branches by kind.
   open_rows=(
