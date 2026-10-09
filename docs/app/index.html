@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>MindNet</title>
+    <!-- PWA: díky manifestu se dá web nainstalovat a pak se objeví v systémovém
+         sdílení Chromu na Androidu (share_target v manifest.json).
+         Cesty jsou relativní schválně: web běží i pod podcestou
+         (GitHub Pages, /mindnet-app/app/), kde by /manifest.json
+         a /sw.js mířily mimo appku. -->
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#14171c" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="apple-touch-icon" href="icons/icon-192.png" />
+    <!-- The `react-native-web` recommended style reset: https://necolas.github.io/react-native-web/docs/setup/#root-element -->
+    <style id="expo-reset">
+      /* These styles make the body full-height */
+      html,
+      body {
+        height: 100%;
+      }
+      /* These styles disable body scrolling if you are using <ScrollView> */
+      body {
+        overflow: hidden;
+      }
+      /* These styles make the root element full-height */
+      #root {
+        display: flex;
+        height: 100%;
+        flex: 1;
+      }
+    </style>
+  <link rel="icon" href="/mindnet-app/app/favicon.ico"/></head>
+
+  <body>
+    <!-- Use static rendering with Expo Router to support running without JavaScript. -->
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+    <!-- The root element for your Expo app. -->
+    <div id="root"></div>
+    <script>
+      // Chrome na Androidu nabídne web ve sdílení jen u nainstalované PWA a ta
+      // potřebuje service worker. Tenhle jen propouští požadavky dál — nic
+      // necachuje, takže vývoj nezmrzne na staré verzi.
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker.register('sw.js').catch(function () {});
+        });
+      }
+    </script>
+  <script src="/mindnet-app/app/_expo/static/js/web/index-ecf9dd9943a9a9587894e0912d5dadff.js" defer></script>
+</body>
+</html>
