@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "mindnet": {
+      "type": "http",
+      "url": "https://uehwmaziprbijyuyuhtx.supabase.co/functions/v1/api/mcp",
+      "headers": { "Authorization": "Bearer ${user_config.agent_key}" }
+    }
+  }
+}

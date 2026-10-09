@@ -54,14 +54,22 @@ the new zip over the old folder and reload the extension in
 
 If you have your own subscription (Claude, for example), your own agent
 can process your articles. In the app, account settings → *Your own
-agent* creates a key and shows a ready-made Claude Code command. The agent
-then needs the skill
-[`skills/process-mindnet-articles`](skills/process-mindnet-articles),
-which describes the whole procedure.
+agent* creates a key and shows a command that installs the MindNet plugin
+for Claude Code with that key. By hand, in Claude Code:
 
-`references/supabase.md`, `scripts/has-work.sh` and
-`scripts/test-pickup.sh` belong to the operator's system agent; your own
-agent does not need them.
+```
+/plugin marketplace add xjacka/mindnet-app
+/plugin install mindnet@mindnet-app
+/mindnet:setup
+```
+
+The plugin ([`plugins/mindnet`](plugins/mindnet)) brings the MindNet MCP
+server, the skill
+[`process-mindnet-articles`](plugins/mindnet/skills/process-mindnet-articles)
+and `/mindnet:setup`, which checks the connection and sets up regular
+runs. Other agents (Codex CLI, Cursor…) add an HTTP MCP server with the
+address from the app and the header `Authorization: Bearer mn_agent_…`
+and use the same skill.
 
 ### Privacy and terms
 
@@ -115,13 +123,20 @@ rozbal přes starou složku a v `chrome://extensions` rozšíření obnov.
 
 Máš-li vlastní předplatné (třeba Claude), může tvoje články zpracovávat
 tvůj agent. V appce v nastavení účtu → *Vlastní agent* vytvoříš klíč
-a dostaneš příkaz pro Claude Code. Agent pak potřebuje skill
-[`skills/process-mindnet-articles`](skills/process-mindnet-articles),
-který popisuje celý postup.
+a dostaneš příkaz, který plugin MindNet do Claude Code nainstaluje rovnou
+s tím klíčem. Ručně v Claude Code:
 
-Soubory `references/supabase.md`, `scripts/has-work.sh`
-a `scripts/test-pickup.sh` patří systémovému agentovi provozovatele
-a vlastní agent je nepotřebuje.
+```
+/plugin marketplace add xjacka/mindnet-app
+/plugin install mindnet@mindnet-app
+/mindnet:setup
+```
+
+Plugin ([`plugins/mindnet`](plugins/mindnet)) přinese MCP server MindNetu,
+skill [`process-mindnet-articles`](plugins/mindnet/skills/process-mindnet-articles)
+a `/mindnet:setup`, který ověří připojení a nastaví pravidelné běhy. Jiní
+agenti (Codex CLI, Cursor…) přidají HTTP MCP server s adresou z appky
+a hlavičkou `Authorization: Bearer mn_agent_…` a použijí týž skill.
 
 ### Soukromí a podmínky
 

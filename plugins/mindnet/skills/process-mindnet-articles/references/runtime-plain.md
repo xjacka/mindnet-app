@@ -1,33 +1,51 @@
-# Runtime: plain harness
+# Runtime: Claude Code
 
-For a session in Claude Code, Codex CLI, Cursor or any other agent that
-has the MindNet MCP tools and not the DAM platform (no `schedule_once`,
-no `spawn_subagent`, no `[mindnet:…]` marker — SKILL.md, „Which runtime
-you are on“). Everything here is on top of SKILL.md.
+For a session of the MindNet plugin in Claude Code: the MindNet MCP
+tools, the files, maybe a shell. Everything here is on top of SKILL.md.
 
-## What is not here, and what you do not imitate
+## What you do not build
 
-A plain harness has none of DAM's machinery. Do not build a substitute
-for it — each substitute breaks something the server or the rules rely
-on:
+- **One session, articles one after another.** Do not start other
+  sessions or agents to work on articles in parallel — through a session
+  manager, a desktop or cloud MCP tool or a background CLI. Those are
+  agents nobody watches, holding the reader's key.
+- **No subagents for the checks.** A Claude subagent (`Agent`, `Task`…) is
+  the same family and is never a checker of Claude text; the checks are
+  your own passes (below).
+- **A schedule only through `/mindnet:setup`** (below). No other cron,
+  loop or routine of your own.
 
-| DAM has | here | why not imitate it |
-|---|---|---|
-| scheduled jobs, the dispatcher, the preflight (`precheck.py`, onboarding) | a person starts the run; you call `status` yourself | a cron, loop or routine you set up yourself is a standing job nobody asked for; the person decides when the agent runs |
-| `schedule_once`: one parallel session per article | one session, articles one after another | starting sessions through another tool (a session manager, a desktop or cloud MCP tool, a background CLI) is starting agents nobody watches, with your key |
-| GPT checks in platform sub-agents (`check.sh`, `judge.py`) | the checks are your own passes | the scripts need DAM's driver SDK and LiteLLM and fail here; a Claude subagent (`Agent`, `Task`…) is the same family and is never a checker of Claude text |
-| a shared pod with check slots | nothing to share | — |
+## Scheduled runs
 
-So in a plain run you **do not**: run anything from `scripts/`, read
-[onboarding.md](onboarding.md), create scheduled or recurring jobs, start
-other sessions or agents, or launch subagents. When the person wants the
-queue processed regularly, say that this skill sets up the schedule only
-on DAM; here they start the run again when they want it, by whatever means
-their harness offers them.
+A reader who does not want to ask every time can have the queue processed
+regularly. `/mindnet:setup` sets that up: it checks the connection and,
+when the person agrees, creates **one** recurring run — a scheduled task
+of the Claude desktop app, a `/loop` in the open session, or a launchd or
+cron job with `claude -p`. Rules:
+
+- **Only when the person asks.** Set up, change or remove the schedule
+  when the person asks for it in the session — they ran `/mindnet:setup`,
+  or said „zpracovávej to pravidelně“, „každou hodinu“, „zruš plán“. Then
+  go by the steps of `/mindnet:setup`. Never on your own initiative: not
+  because the queue is long, not because a run ended with articles still
+  waiting. Then say how many wait and that `/mindnet:setup` sets up
+  regular runs.
+- **One MindNet schedule at most.** Before creating one, look for the
+  existing one (the desktop task `mindnet-articles`, a launchd job
+  `app.mindnet.agent`, a crontab line ending in `# mindnet`) and change it
+  instead of adding a second.
+- **A scheduled run is an ordinary run** (below), started by a prompt that
+  begins „MindNet scheduled run“. It calls `status` first and, when
+  `waiting` is empty, ends at once with one line — most scheduled runs
+  are that, so keep them short: no table, nothing loaded. The cap of six
+  articles holds; the next scheduled run takes the rest.
+- **Nobody watches a scheduled run.** When something needs a person — the
+  tools are missing, the key is rejected, a tool asks for a permission —
+  end with one line saying what and do not repair the configuration.
 
 ## The run
 
-A person asked („zpracuj moje články“, „jsou tam nové články?“). One
+A person asked („zpracuj moje články“, „jsou tam nové články?“), or the schedule the person set up with `/mindnet:setup` started the run (see „Scheduled runs“ above). One
 session handles the articles **one after another**:
 
 1. `status`. An empty `waiting` → tell the person nothing waits (and how
@@ -56,8 +74,7 @@ the new one.
 
 You run the extractor, the cold reader and the fidelity reviewer yourself,
 in the order of [phase-a.md](phase-a.md), with the same templates and the
-same „what to do with the findings — once“. What the clean context and the
-other family gave you on DAM, you replace by three disciplines:
+same „what to do with the findings — once“. What a clean context and another model family would give you, you replace by three disciplines:
 
 - **Write each pass out before the next step.** Its result is a written
   list in the template's shape, not an impression. A list made in your

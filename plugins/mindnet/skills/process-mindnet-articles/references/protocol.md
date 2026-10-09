@@ -9,13 +9,11 @@ where the agent runs, when it runs, or whether it runs at all. So it
 leaves finished prompts in a queue — the `agent_requests` table — and
 whoever answers them is the model.
 
-There are **two ways to the queue**, with one protocol:
+You reach the queue this way:
 
 | who | how | rows |
 |---|---|---|
 | a reader's own agent (ADR-0018) | the MindNet MCP endpoint `POST /mcp` with the reader's key; tools `status`, `claim_article`, `claim`, `answer`, `fail` | `assignee = 'own'` and the reader's `user_id` |
-| the operator's system agent (ADR-0012) | SQL over Supabase (`execute_sql` or `psql`), see [supabase.md](supabase.md) | `assignee = 'ours'`, including Discover rows without a job |
-
 The MCP tools do exactly what the three SQL statements do — the same
 `skip locked` pick-up, the same lease, the same states — only behind a
 key and only over that reader's rows. SKILL.md describes the tools; this
@@ -142,9 +140,7 @@ pending ──pick-up──► claimed ──answer──► answered ──clea
   into five minutes. The other half
   is in `claim` and in the pick-up query: a row on which the answer
   deadline could not be met is not taken at all — for `fragment` at least
-  18 minutes must remain, for the others 3. The SQL side is checked by
-  `scripts/test-pickup.sh` on seeded timestamps, the MCP side by
-  `apps/server/test`.
+  18 minutes must remain, for the others 3.
 - **`attempts`** rises with every `claim`. The third failure = `failed`.
 - **`expires_at`**: a request without an answer within 12 hours the
   clean-up marks `failed` with `error = 'agent neodpověděl'`; the job ends
@@ -156,8 +152,7 @@ pending ──pick-up──► claimed ──answer──► answered ──clea
   pick such a row up.
 - **A dead row**: an open request for a job that is already `done` or
   `failed` the clean-up deletes on the next tick. Until it gets there, do
-  not pick it up — `claim`, the pick-up query in supabase.md and
-  `has-work.sh` bypass it with the job-state condition.
+  not pick it up — `claim` bypasses it with the job-state condition.
 - **`answered` is not deleted at once.** When the job fails later (say on
   the embedding) and runs again from the start, it gets the same answers
   for free.
@@ -254,21 +249,3 @@ Whether that suffices for own articles, pasted text and readers'
 instructions is the operator's decision and their terms, not the agent's.
 The agent only states `lane` in the report and does not change behaviour by it.
 
-## Check queries (system agent, SQL only)
-
-A reader's own agent has `status` for this. These are for the operator
-with database access, read only:
-
-```sql
--- what waits and for how long
-select state, kind, count(*), min(created_at), max(created_at)
-  from agent_requests group by 1, 2 order by 1, 2;
-
--- the requests of one job
-select id, kind, state, attempts, error, created_at, answered_at
-  from agent_requests where job_id = '<job>' order by created_at;
-
--- the state of the job the server asks for (read only)
-select id, state, attempts, next_attempt_at, last_error
-  from processing_jobs where id = '<job>';
-```

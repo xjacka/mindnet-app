@@ -1,0 +1,18 @@
+{
+  "name": "mindnet",
+  "version": "0.4.1",
+  "description": "Your MindNet articles processed by your own Claude: the MindNet MCP server, the article skill and /mindnet:setup for regular runs.",
+  "author": { "name": "MindNet", "email": "app.mindnet@gmail.com" },
+  "homepage": "https://xjacka.github.io/mindnet-app/#agent",
+  "repository": "https://github.com/xjacka/mindnet-app",
+  "keywords": ["mindnet", "mcp", "articles"],
+  "userConfig": {
+    "agent_key": {
+      "type": "string",
+      "title": "MindNet agent key",
+      "description": "The key from the MindNet app: Profile → Own agent → Create key (starts with mn_agent_).",
+      "required": true,
+      "sensitive": true
+    }
+  }
+}

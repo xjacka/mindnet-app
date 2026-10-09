@@ -156,19 +156,3 @@ rounds are the procedure that makes them reachable:
 - Rounds cost time, not cards: the budget is 18 minutes from pick-up and
   the lease 20 (SKILL.md); a late subagent is skipped, not waited for.
 
-## Parallel sessions in one pod work again (8 October 2026, afternoon)
-
-The morning probe showed two sessions colliding in one pod: one froze and
-the pod OOM-restarted. That was a platform defect. Re-test after the fix:
-two `schedule_once` one-offs fired at the same moment (11:35:38 UTC), each
-writing a line to its own log every 10 s for two minutes. Both ran their
-own `pi` process (different pid/ppid), interleaved line for line, wrote
-`DONE` within 3 s of each other and ended `completed/success`. The third,
-interactive session ran on undisturbed. Memory went 459 → 569 MB of
-2 GB. The dispatch therefore moved to one session per article in
-parallel (onboarding `v3`). `check.sh` got a pod-wide semaphore
-(2 sandbox slots), so parallel sessions do not overrun the owner's
-compute.
-Same day, later: the operator raised the limits to **6 parallel article
-sessions** and **4 GPT sandbox slots** (owner's compute 7/30 CPU and
-12/60 GB reserved at the time).

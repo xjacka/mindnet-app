@@ -1,0 +1,12 @@
+{
+  "name": "mindnet-app",
+  "owner": { "name": "MindNet", "email": "app.mindnet@gmail.com" },
+  "description": "MindNet for Claude Code: process your own MindNet articles with your own Claude.",
+  "plugins": [
+    {
+      "name": "mindnet",
+      "source": "./plugins/mindnet",
+      "description": "Your MindNet articles processed by your own Claude: the MindNet MCP server, the article skill and /mindnet:setup for regular runs."
+    }
+  ]
+}

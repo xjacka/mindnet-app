@@ -66,10 +66,7 @@ al. 2026), so completeness is checked only against a list made by someone
 who has not seen your cards; and whoever has just read the article cannot
 tell whether a card stands alone. Hence the rounds. The budget is
 18 minutes from pick-up (SKILL.md): extractor ≤ 4, your writing ≤ 6,
-reviewers ≤ 4, revision ≤ 3. Who runs the three checks depends on the
-runtime: on DAM a model of **another family than the writer** — GPT in
-platform sub-agents via `scripts/check.sh`, in a clean context
-([runtime-dam.md](runtime-dam.md)); in a plain harness you, as separate
+reviewers ≤ 4, revision ≤ 3. Who runs the three checks: you, as separate
 written passes ([runtime-plain.md](runtime-plain.md)). Never a Claude
 subagent on Claude cards.
 
@@ -80,8 +77,7 @@ subagent on Claude cards.
    come as `| a | b |` lines. When the prompt holds a wall instead of an
    article (login, paywall, robot check, error page), stop and close the
    request as `failed` — SKILL.md, „When the article is unavailable“.
-2. **Extractor** (on DAM GPT, `--schema extractor`, in the background as
-   soon as you have the prompt; in a plain harness your own pass, written
+2. **Extractor** (your own pass, written
    out before any outline). Give it the article block from the prompt
    (`<<< … >>>` with the `[¶n]` tags) and the template below — no rules,
    no style, no reader, nothing of yours. It returns core ideas, facts
@@ -123,9 +119,7 @@ subagent on Claude cards.
    the cards flattened to plain text and your vital facts, **no
    article**; the **fidelity reviewer** gets the article, the extractor's
    list and the cards with their key facts. Both report, neither
-   rewrites. On DAM both run on GPT via `scripts/check.sh`
-   (`--schema cold`, `--schema fidelity`), started together in the
-   background; in a plain harness they are your two passes, one after
+   rewrites. They are your two passes, one after
    the other.
 7. **One revision**, by the findings (what to do with each is below). Then
    the gate step by step (below), the list „Before you write the answer“,
@@ -249,8 +243,7 @@ Report, JSON only:
 - `quote_not_verbatim` → copy the sentence again from the article.
 - `strongest_quote_unused` → use it when the thread's quote ceiling allows
   and it replaces a weaker quote or a paraphrase on the same card.
-- A reviewer that is late or fails (budget in SKILL.md) is on DAM
-  retried once on `azure/gpt-5.6-sol`, else skipped — never replaced by a
+- A reviewer that is late or fails (budget in SKILL.md) is skipped — never replaced by a
   Claude subagent; note it in the report. After the one revision a card you still doubt is anchored harder
   or dropped — never sent round again.
 
@@ -435,8 +428,7 @@ elements in the text („see below“, „the figure under the text“).
 
 - [ ] The extractor ran before you wrote and every core idea on its list
       has a card or a reason to have none; the cold reader and the fidelity
-      reviewer ran — on DAM on GPT (another family than the writer), in a
-      plain harness as your own written passes — and their findings are
+      reviewer ran — as your own written passes — and their findings are
       worked in, or the card is dropped. What was skipped for time is in
       the report.
 - [ ] Every card carries an insight — a figure, a finding, a mechanism, a

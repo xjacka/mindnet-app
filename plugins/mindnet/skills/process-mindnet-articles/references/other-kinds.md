@@ -172,9 +172,7 @@ sentences, put the new information at the end of the sentence, prefer
 verbs to nominal phrases, keep the field's terms as the glossary says —
 but the sentence around them entirely in the target language. After the
 translation run the proofreader (SKILL.md, „The checks“): it gets only
-your translation and reports foreign words and errors — on DAM an
-empty-context GPT call (`--schema proofread`, runtime-dam.md), in a plain
-harness your own pass (runtime-plain.md); fix `final` body and blocks and
+your translation and reports foreign words and errors — your own pass (runtime-plain.md); fix `final` body and blocks and
 do not repeat the check.
 
 Keep: the meaning and roughly the length; the block structure (kind,

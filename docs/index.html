@@ -45,9 +45,16 @@
         <p>Tatáž appka v prohlížeči, bez instalace — na proklikání na počítači. Notifikace umí jen Android.</p>
         <a class="button" href="app/">Otevřít v prohlížeči</a>
       </div>
+      <div class="card">
+        <h3>Claude Code</h3>
+        <p>Plugin pro tvého vlastního agenta: připojení k MindNetu, skill na zpracování článků
+          a pravidelné běhy. Klíč si vytvoříš v appce.</p>
+        <p class="muted">Nebo <a href="#agent">dva příkazy ručně</a>.</p>
+        <a class="button" href="claude-cli://open?q=Nainstaluj%20mi%20plugin%20MindNet%3A%20v%20shellu%20spus%C5%A5%20claude%20plugin%20marketplace%20add%20xjacka%2Fmindnet-app%20a%20potom%20claude%20plugin%20install%20mindnet%40mindnet-app.%20O%20kl%C3%AD%C4%8D%20si%20ne%C5%99%C3%ADkej.%20Nakonec%20mi%20p%C5%99ipome%C5%88%2C%20a%C5%A5%20kl%C3%AD%C4%8D%20z%20appky%20zad%C3%A1m%20s%C3%A1m%20p%C5%99%C3%ADkazem%20%2Fplugin%20configure%20mindnet%40mindnet-app%20a%20pak%20spust%C3%ADm%20%2Freload-plugins%20a%20%2Fmindnet%3Asetup.">Otevřít v Claude Code</a>
+      </div>
     </div>
     <p class="muted">APK i rozšíření jsou ze stejného <a href="https://github.com/xjacka/mindnet-app/releases/latest">posledního vydání</a>,
-      web je vždycky v poslední verzi. Na iPhone zatím appka není.</p>
+      web i plugin jsou vždycky v poslední verzi. Na iPhone zatím appka není.</p>
 
     <h2>Instalace na Android</h2>
     <ol>
@@ -79,13 +86,28 @@
     <p>Články zpracovává jazykový model. Pokud máš vlastní předplatné — třeba Claude — může tvoje články
       zpracovávat tvůj vlastní agent: nečekáš na nikoho, nepočítá se ti to do denního stropu a model si
       vybereš sám.</p>
+
+    <h3>Claude Code</h3>
     <ol>
-      <li>V appce otevři nastavení účtu → <strong>Vlastní agent</strong> a vytvoř klíč.
-        Appka ti rovnou ukáže příkaz pro Claude Code s adresou serveru i klíčem.</li>
-      <li>Agentovi dej skill <a href="https://github.com/xjacka/mindnet-app/tree/main/skills/process-mindnet-articles"><code>process-mindnet-articles</code></a>
-        — popisuje, jak články vyzvedávat a odpovídat na zadání.</li>
-      <li>V nastavení zvol, že tvoje články zpracovává vlastní agent.</li>
+      <li>V appce otevři nastavení účtu → <strong>Vlastní agent</strong> a vytvoř klíč. Appka ti ukáže
+        příkaz, který plugin MindNet nainstaluje rovnou s tím klíčem — vlož ho do terminálu.</li>
+      <li>Nebo přímo v Claude Code: <code>/plugin marketplace add xjacka/mindnet-app</code>
+        a <code>/plugin install mindnet@mindnet-app</code>. Když se na klíč nezeptá sám, zadáš ho
+        příkazem <code>/plugin configure mindnet@mindnet-app</code>. Totéž udělá tlačítko
+        <a href="claude-cli://open?q=Nainstaluj%20mi%20plugin%20MindNet%3A%20v%20shellu%20spus%C5%A5%20claude%20plugin%20marketplace%20add%20xjacka%2Fmindnet-app%20a%20potom%20claude%20plugin%20install%20mindnet%40mindnet-app.%20O%20kl%C3%AD%C4%8D%20si%20ne%C5%99%C3%ADkej.%20Nakonec%20mi%20p%C5%99ipome%C5%88%2C%20a%C5%A5%20kl%C3%AD%C4%8D%20z%20appky%20zad%C3%A1m%20s%C3%A1m%20p%C5%99%C3%ADkazem%20%2Fplugin%20configure%20mindnet%40mindnet-app%20a%20pak%20spust%C3%ADm%20%2Freload-plugins%20a%20%2Fmindnet%3Asetup.">Otevřít v Claude Code</a>, když už Claude Code máš.</li>
+      <li>Spusť <code>/mindnet:setup</code>. Ověří připojení a na přání nastaví pravidelné zpracování:
+        v desktopové appce Claude jako naplánovanou úlohu, v terminálu jako <code>/loop</code> nebo úlohu
+        na pozadí.</li>
+      <li>V nastavení appky zvol, že tvoje články zpracovává vlastní agent.</li>
     </ol>
+    <p>Pravidelné běhy jedou jen na zapnutém počítači. Když agent neodpoví včas, článek zpracuje model,
+      takže se nic nezasekne.</p>
+
+    <h3>Jiný agent</h3>
+    <p>Codex CLI, Cursor a další: přidej HTTP MCP server s adresou z appky a hlavičkou
+      <code>Authorization: Bearer mn_agent_…</code> a dej agentovi skill
+      <a href="https://github.com/xjacka/mindnet-app/tree/main/plugins/mindnet/skills/process-mindnet-articles"><code>process-mindnet-articles</code></a> — popisuje, jak články vyzvedávat
+      a odpovídat na zadání.</p>
     <p class="muted">Agent přes MCP vidí jen tvoje články a zadání. Text článku tím odchází k poskytovateli
       tvého modelu.</p>
 
