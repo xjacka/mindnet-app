@@ -63,7 +63,7 @@ agent does not need them.
 ### Contact
 
 Bugs and ideas: [issues](https://github.com/xjacka/mindnet-app/issues)
-or xjacka@gmail.com.
+or app.mindnet@gmail.com.
 
 ---
 
@@ -117,4 +117,4 @@ a vlastní agent je nepotřebuje.
 ### Kontakt
 
 Chyby a nápady do [issues](https://github.com/xjacka/mindnet-app/issues)
-nebo na xjacka@gmail.com.
+nebo na app.mindnet@gmail.com.
