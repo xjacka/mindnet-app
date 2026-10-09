@@ -68,7 +68,7 @@ tell whether a card stands alone. Hence the rounds. The budget is
 18 minutes from pick-up (SKILL.md): extractor ≤ 4, your writing ≤ 6,
 reviewers ≤ 4 side by side, revision ≤ 3. All three subagents run on
 **another model family than the writer** — GPT in platform sub-agents
-via `scripts/kontrola.sh` (platform-spawn-first, falls back to `--direct`;
+via `scripts/check.sh` (platform-spawn-first, falls back to `--direct`;
 SKILL.md, „Checks on OpenAI“) — in a clean
 context. Never a Claude subagent on Claude cards.
 
@@ -121,7 +121,7 @@ context. Never a Claude subagent on Claude cards.
    the **cold reader** gets the cards flattened to plain text and your
    vital facts, **no article**; the **fidelity reviewer** gets the article,
    the extractor's list and the cards with their key facts. Both report,
-   neither rewrites. Both run on GPT via `scripts/kontrola.sh` (`--schema cold`,
+   neither rewrites. Both run on GPT via `scripts/check.sh` (`--schema cold`,
    `--schema fidelity`), started together in the background.
 7. **One revision**, by the findings (what to do with each is below). Then
    the gate step by step (below), the list „Before you write the answer“,

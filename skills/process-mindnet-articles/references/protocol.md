@@ -142,7 +142,7 @@ pending ──pick-up──► claimed ──answer──► answered ──clea
   is in `claim` and in the pick-up query: a row on which the answer
   deadline could not be met is not taken at all — for `fragment` at least
   18 minutes must remain, for the others 3. The SQL side is checked by
-  `scripts/test-vyzvednuti.sh` on seeded timestamps, the MCP side by
+  `scripts/test-pickup.sh` on seeded timestamps, the MCP side by
   `apps/server/test`.
 - **`attempts`** rises with every `claim`. The third failure = `failed`.
 - **`expires_at`**: a request without an answer within 12 hours the
@@ -156,7 +156,7 @@ pending ──pick-up──► claimed ──answer──► answered ──clea
 - **A dead row**: an open request for a job that is already `done` or
   `failed` the clean-up deletes on the next tick. Until it gets there, do
   not pick it up — `claim`, the pick-up query in supabase.md and
-  `ceka-prace.sh` bypass it with the job-state condition.
+  `has-work.sh` bypass it with the job-state condition.
 - **`answered` is not deleted at once.** When the job fails later (say on
   the embedding) and runs again from the start, it gets the same answers
   for free.

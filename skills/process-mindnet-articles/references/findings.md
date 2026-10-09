@@ -166,7 +166,7 @@ own `pi` process (different pid/ppid), interleaved line for line, wrote
 `DONE` within 3 s of each other and ended `completed/success`. The third,
 interactive session ran on undisturbed. Memory went 459 → 569 MB of
 2 GB. The dispatch therefore moved to one session per article in
-parallel (onboarding `v3`). `kontrola.sh` got a pod-wide semaphore
+parallel (onboarding `v3`). `check.sh` got a pod-wide semaphore
 (2 sandbox slots), so parallel sessions do not overrun the owner's
 compute.
 Same day, later: the operator raised the limits to **6 parallel article

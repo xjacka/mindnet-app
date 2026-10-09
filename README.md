@@ -1,22 +1,81 @@
 # MindNet
 
-Vhoď článek, který nemáš čas přečíst. Rozpadne se na pár krátkých příspěvků —
-ve tvém jazyce a podle toho, co tě zajímá.
+**[English](#english) · [Česky](#česky)**
 
-**Veřejná beta.** Web s návodem: **https://xjacka.github.io/mindnet-app/**
-
-Tohle repo slouží k distribuci: najdeš tu instalační soubory, návod
-a skill pro vlastního agenta. Zdrojový kód appky tu není.
-
-## Stažení
+Website: **https://xjacka.github.io/mindnet-app/** ([English](https://xjacka.github.io/mindnet-app/en/))
 
 | | |
 |---|---|
 | Android | [mindnet.apk](https://github.com/xjacka/mindnet-app/releases/latest/download/mindnet.apk) |
-| Rozšíření pro Chrome | [mindnet-extension.zip](https://github.com/xjacka/mindnet-app/releases/latest/download/mindnet-extension.zip) |
+| Chrome extension | [mindnet-extension.zip](https://github.com/xjacka/mindnet-app/releases/latest/download/mindnet-extension.zip) |
 
-Odkazy vedou vždycky na poslední vydání. Starší verze jsou v
-[Releases](https://github.com/xjacka/mindnet-app/releases).
+---
+
+## English
+
+Drop in an article you have no time to read. It breaks down into a few
+short posts — in your language and shaped by what interests you.
+
+**Public beta.** This repository is for distribution: the installation
+files, the guide and the skill for your own agent. The app's source code
+is not here. The links above always point to the latest release; older
+versions are under [Releases](https://github.com/xjacka/mindnet-app/releases).
+
+### Android
+
+1. Download the APK on your phone and open it.
+2. Allow your browser to install apps (*Install unknown apps*).
+3. If Google Play Protect warns you, choose *More details → Install
+   anyway*. MindNet is not on Google Play yet.
+
+The app announces new versions itself. Install them over the old one;
+nothing gets lost.
+
+### Chrome extension
+
+1. Unpack the zip somewhere the `mindnet-extension` folder can stay for good.
+2. `chrome://extensions` → switch on **Developer mode** → **Load
+   unpacked** → pick the `mindnet-extension` folder.
+3. Open the extension and sign in via ⚙ with the same account as in the app.
+
+A *New version* label in the extension window announces updates. Unpack
+the new zip over the old folder and reload the extension in
+`chrome://extensions`.
+
+### Your own agent
+
+If you have your own subscription (Claude, for example), your own agent
+can process your articles. In the app, account settings → *Your own
+agent* creates a key and shows a ready-made Claude Code command. The agent
+then needs the skill
+[`skills/process-mindnet-articles`](skills/process-mindnet-articles),
+which describes the whole procedure.
+
+`references/supabase.md`, `scripts/has-work.sh` and
+`scripts/test-pickup.sh` belong to the operator's system agent; your own
+agent does not need them.
+
+### Privacy and terms
+
+- [Privacy policy](https://xjacka.github.io/mindnet-app/en/privacy.html)
+- [Beta terms](https://xjacka.github.io/mindnet-app/en/#terms)
+
+### Contact
+
+Bugs and ideas: [issues](https://github.com/xjacka/mindnet-app/issues)
+or xjacka@gmail.com.
+
+---
+
+## Česky
+
+Vhoď článek, který nemáš čas přečíst. Rozpadne se na pár krátkých
+příspěvků — ve tvém jazyce a podle toho, co tě zajímá.
+
+**Veřejná beta.** Tohle repo slouží k distribuci: najdeš tu instalační
+soubory, návod a skill pro vlastního agenta. Zdrojový kód appky tu není.
+Odkazy nahoře vedou vždycky na poslední vydání; starší verze jsou
+v [Releases](https://github.com/xjacka/mindnet-app/releases).
 
 ### Android
 
@@ -38,24 +97,24 @@ se při tom neztratí.
 Na novou verzi upozorní štítek *Nová verze* v okně rozšíření. Nový zip
 rozbal přes starou složku a v `chrome://extensions` rozšíření obnov.
 
-## Vlastní agent
+### Vlastní agent
 
 Máš-li vlastní předplatné (třeba Claude), může tvoje články zpracovávat
 tvůj agent. V appce v nastavení účtu → *Vlastní agent* vytvoříš klíč
 a dostaneš příkaz pro Claude Code. Agent pak potřebuje skill
-[`skills/zpracuj-clanky`](skills/zpracuj-clanky), který popisuje celý
-postup.
+[`skills/process-mindnet-articles`](skills/process-mindnet-articles),
+který popisuje celý postup.
 
-Soubory `references/supabase.md`, `scripts/ceka-prace.sh`
-a `scripts/test-vyzvednuti.sh` patří systémovému agentovi provozovatele
+Soubory `references/supabase.md`, `scripts/has-work.sh`
+a `scripts/test-pickup.sh` patří systémovému agentovi provozovatele
 a vlastní agent je nepotřebuje.
 
-## Soukromí a podmínky
+### Soukromí a podmínky
 
 - [Zásady ochrany soukromí](https://xjacka.github.io/mindnet-app/privacy.html)
 - [Podmínky bety](https://xjacka.github.io/mindnet-app/#podminky)
 
-## Kontakt
+### Kontakt
 
 Chyby a nápady do [issues](https://github.com/xjacka/mindnet-app/issues)
 nebo na xjacka@gmail.com.

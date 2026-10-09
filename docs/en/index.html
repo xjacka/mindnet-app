@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MindNet — public beta</title>
+<meta name="description" content="Drop in an article you have no time to read. It breaks down into a few short posts — in your language and shaped by what interests you.">
+<link rel="icon" href="../icon.png">
+<link rel="stylesheet" href="../style.css">
+<link rel="alternate" hreflang="cs" href="../">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a href="./"><img src="../icon.png" alt=""><span class="wordmark">MindNet</span></a>
+    <nav>
+      <a href="#install">Install</a>
+      <a href="#agent">Own agent</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="../" hreflang="cs" lang="cs">Česky</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Drop in an article you have no time to read.</h1>
+    <p class="lead">It breaks down into a few short posts — in your language and shaped by what interests you.
+      Send it from your phone or your browser and a moment later it is in your feed.</p>
+    <p><span class="badge">Public beta</span></p>
+
+    <div class="cards" id="install">
+      <div class="card">
+        <h3>Android</h3>
+        <p>The phone app. Send it an article with Share from your browser or any other app.</p>
+        <a class="button" href="https://github.com/xjacka/mindnet-app/releases/latest/download/mindnet.apk">Download APK</a>
+      </div>
+      <div class="card">
+        <h3>Chrome extension</h3>
+        <p>Sends an article or a selected passage from the browser on your computer. Tested in Chrome.</p>
+        <a class="button" href="https://github.com/xjacka/mindnet-app/releases/latest/download/mindnet-extension.zip">Download extension</a>
+      </div>
+    </div>
+    <p class="muted">Both come from the same <a href="https://github.com/xjacka/mindnet-app/releases/latest">latest release</a>.
+      There is no iPhone app yet.</p>
+
+    <h2>Installing on Android</h2>
+    <ol>
+      <li>On your phone, open the <a href="https://github.com/xjacka/mindnet-app/releases/latest/download/mindnet.apk">APK link</a> and download it.</li>
+      <li>Open the downloaded file. Android asks whether your browser may install apps — allow it
+        (<strong>Install unknown apps</strong>).</li>
+      <li>Google Play Protect may warn that it does not know the app: MindNet is not on Google Play yet.
+        Choose <strong>More details → Install anyway</strong>.</li>
+      <li>Sign in with Google or with an email address.</li>
+    </ol>
+    <p>When a new version comes out, the app tells you with a bar under its header. Tap
+      <strong>Download</strong> and install it over the old one — nothing gets lost.</p>
+
+    <h2>Installing the extension</h2>
+    <p>The extension is not in the Chrome Web Store yet, so it is installed from an unpacked folder:</p>
+    <ol>
+      <li>Download the <a href="https://github.com/xjacka/mindnet-app/releases/latest/download/mindnet-extension.zip">extension zip</a>
+        and unpack it somewhere the <code>mindnet-extension</code> folder can stay for good — the browser reads it
+        from disk every time it starts. A Downloads folder you clean out now and then is not a good place.</li>
+      <li>Open <code>chrome://extensions</code> and switch on <strong>Developer mode</strong> in the top right.</li>
+      <li>Click <strong>Load unpacked</strong> and pick the <code>mindnet-extension</code> folder.</li>
+      <li>Pin the MindNet icon next to the address bar, open it and sign in via ⚙ — with the same account as in the app.</li>
+    </ol>
+    <p><strong>Updates:</strong> when a new version is out, the extension window shows a
+      <em>New version</em> label. Download the new zip, unpack it <strong>over the old folder</strong> and click
+      the reload arrow next to MindNet in <code>chrome://extensions</code>. You stay signed in.</p>
+
+    <h2 id="agent">Own agent</h2>
+    <p>Articles are processed by a language model. If you have your own subscription — Claude, for example —
+      your own agent can process your articles: you wait for no one, it does not count towards your daily
+      limit and you pick the model yourself.</p>
+    <ol>
+      <li>In the app, open account settings → <strong>Your own agent</strong> and create a key.
+        The app shows a ready-made Claude Code command with the server address and the key.</li>
+      <li>Give your agent the skill <a href="https://github.com/xjacka/mindnet-app/tree/main/skills/process-mindnet-articles"><code>process-mindnet-articles</code></a>
+        — it describes how to pick up articles and answer their prompts.</li>
+      <li>In settings, choose that your articles are processed by your own agent.</li>
+    </ol>
+    <p class="muted">Over MCP the agent sees only your articles and prompts. The article text goes to your
+      model's provider.</p>
+
+    <h2 id="terms">Beta terms</h2>
+    <ul>
+      <li>MindNet is under development and free. Features change, things may break and the beta may end.</li>
+      <li>Every account has a daily limit of processed articles; whatever does not fit is processed the next day.</li>
+      <li>Do not send MindNet anything you may not share with the service providers listed in the
+        <a href="privacy.html">privacy policy</a> — article text passes through a language model.</li>
+      <li>You are responsible for the content you send or share with others.</li>
+      <li>You can delete your account and everything in it at any time in the app's settings.</li>
+    </ul>
+
+    <h2>Contact</h2>
+    <p>Bugs, ideas and questions: <a href="mailto:xjacka@gmail.com">xjacka@gmail.com</a>
+      or <a href="https://github.com/xjacka/mindnet-app/issues">GitHub issues</a>.</p>
+  </main>
+
+  <footer>
+    MindNet · <a href="privacy.html">Privacy policy</a> · <a href="https://github.com/xjacka/mindnet-app">GitHub</a> · <a href="../" hreflang="cs">Česky</a>
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MindNet — privacy policy</title>
+<meta name="description" content="What data MindNet processes, why, who has access to it and how to delete it.">
+<link rel="icon" href="../icon.png">
+<link rel="stylesheet" href="../style.css">
+<link rel="alternate" hreflang="cs" href="../privacy.html">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a href="./"><img src="../icon.png" alt=""><span class="wordmark">MindNet</span></a>
+    <nav>
+      <a href="./#install">Install</a>
+      <a href="./#terms">Terms</a>
+      <a href="../privacy.html" hreflang="cs" lang="cs">Česky</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Privacy policy</h1>
+    <p class="muted">Effective 9 October 2026 · public beta</p>
+
+    <div class="note">
+      <p><strong>In short:</strong> we store your account and what you create in MindNet. We do not store the
+        text of web articles after processing them. Articles are processed by a language model at the
+        providers listed below. We sell nothing and show no ads. You delete your account with all its content
+        yourself in the app's settings.</p>
+    </div>
+
+    <h2>Who processes the data</h2>
+    <p>The controller is Lukáš Janeček, who runs MindNet. Contact for anything about your data:
+      <a href="mailto:xjacka@gmail.com">xjacka@gmail.com</a>.</p>
+
+    <h2>What data and why</h2>
+    <div class="table-scroll">
+    <table>
+      <tr><th>Data</th><th>Purpose</th></tr>
+      <tr><td><strong>Account</strong> — email, name, handle, profile picture (from Google or your own), language and app settings</td>
+        <td>Signing in, showing your profile to people you allow, and posts in your language.</td></tr>
+      <tr><td><strong>What you send</strong> — links to articles, pasted text and files (PDF, EPUB), selected passages, comments, bookmarks, questions about articles, followed sites and channels</td>
+        <td>Posts are made from it. Pasted text and files are stored because there is no other original.</td></tr>
+      <tr><td><strong>What is created</strong> — posts, translations, summaries and their numeric fingerprints (embeddings)</td>
+        <td>Feed, search and recommending similar content.</td></tr>
+      <tr><td><strong>How you use MindNet</strong> — stars, saved, read and hidden posts, interests from the initial setup</td>
+        <td>Ordering the feed and choosing what interests you. These signals also produce a short written description of your interests that the model receives when choosing content for you.</td></tr>
+      <tr><td><strong>People and groups</strong> — whom you follow, who follows you, groups, shares and public links</td>
+        <td>The social part: what to show to whom. A post is visible only to those you make it available to.</td></tr>
+      <tr><td><strong>Device</strong> — notification token</td>
+        <td>Sending notifications to your phone.</td></tr>
+      <tr><td><strong>Own agent keys</strong></td>
+        <td>Connecting your own agent, if you use one.</td></tr>
+    </table>
+    </div>
+    <p><strong>The text of web articles is not stored.</strong> The server fetches an article, processes it and
+      keeps only what came out of it (posts, a short extract, the title). The exception is the text of a page
+      the server cannot fetch and your device sends instead: it is kept for at most 30 days.</p>
+    <p>The legal basis is the performance of a contract — the service does not work without this data — and,
+      for improving the service, legitimate interest.</p>
+
+    <h2>Who we share data with</h2>
+    <p>Only with providers MindNet cannot work without:</p>
+    <div class="table-scroll">
+    <table>
+      <tr><th>Provider</th><th>What it does</th><th>What it receives</th></tr>
+      <tr><td>Supabase (data in Ireland, EU)</td><td>database, sign-in, storage, server</td><td>all the data above</td></tr>
+      <tr><td>Google</td><td>Google sign-in, phone notifications (Firebase)</td><td>Google sign-in data, device token and notification content</td></tr>
+      <tr><td>Anthropic (Claude), Google (Gemini), Groq</td><td>language models that process articles</td><td>the article text and the finished prompt, including your settings and interest description</td></tr>
+      <tr><td>Tavily</td><td>web search for articles</td><td>the search query</td></tr>
+      <tr><td>GitHub</td><td>app downloads and new-version checks</td><td>your IP address when downloading and checking the version</td></tr>
+    </table>
+    </div>
+    <p>Some of them are based in the USA; transfers follow standard contractual clauses or the EU–US Data
+      Privacy Framework under their terms. If you connect your <strong>own agent</strong>, prompts with article
+      text go to your model's provider under your own agreement with it.</p>
+    <p>We do not sell data and do not use it for advertising.</p>
+
+    <h2>How long</h2>
+    <ul>
+      <li>Your account and content: until you delete the account.</li>
+      <li>Untouched posts from followed sources and never-opened articles in the reading list: 30 days.
+        The periods are listed in the app's settings under Data retention.</li>
+      <li>The shared cache of processed articles (extracts, translations) does not belong to any one account;
+        whatever nothing points to any more is removed by a daily clean-up.</li>
+    </ul>
+
+    <h2>Your rights</h2>
+    <p>You have the right to access your data, have it corrected or erased, restrict processing, data
+      portability and the right to object. <strong>You delete your account yourself</strong> in the app's
+      settings — the profile and everything attached to it is deleted, including posts you shared with
+      others. For anything else write to <a href="mailto:xjacka@gmail.com">xjacka@gmail.com</a>. You can lodge a
+      complaint with the Czech Office for Personal Data Protection (<a href="https://uoou.gov.cz/en">uoou.gov.cz</a>)
+      or the supervisory authority where you live.</p>
+
+    <h2>Browser extension</h2>
+    <p>The extension reads a page only when you open it or use it from the right-click menu, and only the page
+      you are on. It sends the title, address, selected passage and possibly the page text — nothing in the
+      background. It keeps your sign-in in the browser's storage and never stores your password.</p>
+
+    <h2>Changes</h2>
+    <p>When this policy changes, we update the date at the top and announce significant changes in the app.</p>
+  </main>
+
+  <footer>
+    MindNet · <a href="./">Home</a> · <a href="https://github.com/xjacka/mindnet-app">GitHub</a> · <a href="../privacy.html" hreflang="cs">Česky</a>
+  </footer>
+</div>
+</body>
+</html>

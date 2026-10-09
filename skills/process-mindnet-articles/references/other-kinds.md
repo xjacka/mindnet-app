@@ -132,7 +132,7 @@ What the translation gate (`translation-gate.ts`) does with the answer,
 | a different count or different kinds of blocks than the original | dropped — the translated post would be poorer |
 | a figure in `stat` or `chart` changed or vanished (rewriting a unit is fine) | dropped |
 | the length of `body` outside 0.6–1.6 of the original | dropped |
-| a block outside the set or outside the limits | the normaliser drops it (limits in [faze-a.md](faze-a.md)) |
+| a block outside the set or outside the limits | the normaliser drops it (limits in [phase-a.md](phase-a.md)) |
 | a broken mark `[[name\|note]]` | the normaliser drops the mark, the bare name stays; the gate logs a soft finding |
 
 A dropped translation gets **one repair**: the same prompt again, followed

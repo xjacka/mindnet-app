@@ -1,22 +1,22 @@
 #!/usr/bin/env python3
-"""Soudce (fidelity reviewer) v samostatném platformním subagentovi na OpenAI modelu.
+"""Judge (fidelity reviewer) in a separate platform sub-agent on an OpenAI model.
 
-Pravidlo: kdo píše a kdo kontroluje, jsou vždy z jiné rodiny. Píše Claude,
-takže každá kontrola (extraktor, studený čtenář, kontrolor věrnosti,
-korektor překladu) jde sem, na GPT. Modely nadržují vlastnímu textu
-(MSumBench; Wataoka et al. 2024). Platformní subagent na
-harnessu codex s modelem GPT dává jinou rodinu i čistý kontext.
+Rule: who writes and who checks are always from different families. Claude
+writes, so every check (extractor, cold reader, fidelity reviewer,
+translate proofreader) comes here, to GPT. Models favour their own text
+(MSumBench; Wataoka et al. 2024). A platform sub-agent on the
+codex harness with a GPT model gives both another family and a clean context.
 
-Použití:
-  python3 soudce.py PROMPT_FILE [--schema fidelity|cold|extractor|proofread|FILE.json]
+Usage:
+  python3 judge.py PROMPT_FILE [--schema fidelity|cold|extractor|proofread|FILE.json]
                     [--model azure/gpt-6-astra] [--effort high] [--ttl-min 8]
-                    [--out vysledek.json]
+                    [--out result.json]
 
-PROMPT_FILE je hotová šablona z references/faze-a.md s vyplněným článkem,
-seznamem extraktoru a kartami. Výsledek (JSON ověřený platformou podle
-schématu) jde na stdout a do --out. Průběh a model jdou na stderr.
+PROMPT_FILE is a finished template from references/phase-a.md with the article,
+the extractor's list and the cards filled in. The result (JSON validated by the
+platform against the schema) goes to stdout and to --out. Progress and model go to stderr.
 
-Návratový kód: 0 hotovo, 1 subagent selhal (důvod na stderr), 2 špatné argumenty.
+Exit code: 0 done, 1 the sub-agent failed (reason on stderr), 2 bad arguments.
 """
 import argparse, json, sys, time
 import driver_sdk as d
@@ -143,11 +143,11 @@ def main() -> int:
     ap.add_argument("--effort", default="high")
     ap.add_argument("--ttl-min", type=float, default=8)
     ap.add_argument("--out")
-    ap.add_argument("--label", default="soudce")
+    ap.add_argument("--label", default="judge")
     ap.add_argument("--direct", action="store_true",
-                    help="bez sandboxu: přímé volání GPT přes LiteLLM (~10 s místo ~30-40 s); stejný model, čistý kontext, schéma ověřuje skript")
+                    help="no sandbox: direct GPT call through LiteLLM (~10 s instead of ~30-40 s); same model, clean context, the script validates the schema")
     ap.add_argument("--spawn-model", default="gpt-6-astra",
-                    help="model pro platformní spawn na harnessu codex. Výchozí gpt-6-astra (BEZ prefixu azure/) — ověřeno, codex ho přijímá a dá GPT-6. NEPOSÍLEJ azure/gpt-6-astra: s tím prefixem codex vrací 400 a subagent TIŠE VISÍ do liveness (platformní vada, admin 8 října 2026). Prázdné = harness default (gpt-5). Pozn.: i s platným názvem je spawn občas flaky (~1 ze 4 padá na liveness) — kontrola.sh pak fallbackne na --direct. --model slouží jen pro --direct.")
+                    help="model for the platform spawn on the codex harness. Default gpt-6-astra (WITHOUT the azure/ prefix) — verified, codex accepts it and gives GPT-6. DO NOT SEND azure/gpt-6-astra: with that prefix codex returns 400 and the sub-agent HANGS SILENTLY until liveness (platform defect, admin 8 October 2026). Empty = harness default (gpt-5). Note: even with a valid name the spawn is occasionally flaky (~1 in 4 dies on liveness) — check.sh then falls back to --direct. --model applies only to --direct.")
     a = ap.parse_args()
 
     schema = SCHEMAS.get(a.schema)
@@ -163,18 +163,18 @@ def main() -> int:
     if a.direct:
         res = direct_call(prompt, schema, a.model, a.effort, a.ttl_min * 60)
         if res is None:
-            print(f"SOUDCE FAILED (direct) after {time.time()-t0:.0f}s", file=sys.stderr)
+            print(f"JUDGE FAILED (direct) after {time.time()-t0:.0f}s", file=sys.stderr)
             return 1
-        print(f"soudce done in {time.time()-t0:.0f}s on {a.model} (direct)", file=sys.stderr)
+        print(f"judge done in {time.time()-t0:.0f}s on {a.model} (direct)", file=sys.stderr)
         txt = json.dumps(res, ensure_ascii=False, indent=1)
         if a.out:
             open(a.out, "w", encoding="utf-8").write(txt)
         print(txt)
         return 0
-    # Pro platformní spawn model NEPOSÍLÁME (default harnessu codex = gpt-5,
-    # GPT rodina) — LiteLLM název typu azure/gpt-6-astra codex odmítne 400 a
-    # subagent tiše visí do liveness. Použij --spawn-model jen když víš, že
-    # harness ten název přijímá.
+    # For the platform spawn we do NOT send the model (codex harness default = gpt-5,
+    # GPT family) — codex rejects a LiteLLM name like azure/gpt-6-astra with 400 and
+    # the sub-agent hangs silently until liveness. Use --spawn-model only when you know
+    # the harness accepts that name.
     spawn_kwargs = {"harness": "codex",
                     "config_options": {"effort": a.effort} if a.effort else None,
                     "ttl_ms": int(a.ttl_min * 60_000), "label": a.label, "poll_seconds": 1.0}
@@ -183,9 +183,9 @@ def main() -> int:
     try:
         res = d.spawn(prompt, schema, **spawn_kwargs)
     except d.InvocationFailed as e:
-        print(f"SOUDCE FAILED after {time.time()-t0:.0f}s: {e.reason or e}", file=sys.stderr)
+        print(f"JUDGE FAILED after {time.time()-t0:.0f}s: {e.reason or e}", file=sys.stderr)
         return 1
-    print(f"soudce done in {time.time()-t0:.0f}s on spawn-model={a.spawn_model or 'harness-default(gpt-5)'} (reports: {res.get('judge_model') if isinstance(res, dict) else '?'})",
+    print(f"judge done in {time.time()-t0:.0f}s on spawn-model={a.spawn_model or 'harness-default(gpt-5)'} (reports: {res.get('judge_model') if isinstance(res, dict) else '?'})",
           file=sys.stderr)
     txt = json.dumps(res, ensure_ascii=False, indent=1)
     if a.out:

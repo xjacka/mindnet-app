@@ -22,8 +22,8 @@ session in this pod**:
 The dispatcher is cheap: its preflight skips the run unless articles wait
 and a slot is free, so most ticks never wake an agent.
 
-Every prompt below starts with a marker line, `[mindnet:dispatch v3]` or
-`[mindnet:article v3]`. The marker tells a session it **is** one of these
+Every prompt below starts with a marker line, `[mindnet:dispatch v4]` or
+`[mindnet:article v4]`. The marker tells a session it **is** one of these
 jobs (so it never runs onboarding itself) and its version tells onboarding
 whether an existing job is up to date.
 
@@ -57,7 +57,7 @@ with a marker skips this file entirely.
 3. **Run the preflight once by hand:**
    `python3 <skill dir>/scripts/precheck.py dispatch; echo "exit $?"`,
    where `<skill dir>` is the folder this skill was loaded from (on the
-   platform `/home/agent/.pi/agent/skills/zpracuj-clanky`). Expected:
+   platform `/home/agent/.pi/agent/skills/process-mindnet-articles`). Expected:
    a summary line and `exit 1` (nothing waits) or `exit 0`. A line
    starting `PRECHECK FAILED:` means the address is wrong or unreachable
    (and on a direct platform, that a key is missing); fix that before
@@ -65,12 +65,17 @@ with a marker skips this file entirely.
    itself — a broken preflight never stops the queue, it only loses the
    cheap skip of an empty tick.
 4. **Look at the existing jobs.** List the platform's scheduled jobs.
-   - `mindnet-dispatch` with marker `v3` → nothing to do, go to step 7.
+   - `mindnet-dispatch` with marker `v4` → nothing to do, go to step 7.
+   - `mindnet-dispatch` with marker `v3` → the same jobs under the skill's
+     former name `zpracuj-clanky` (renamed 9 October 2026, file names
+     too). Update its prompt to the one below **and** its preflight path to
+     this skill's directory — the old directory may be gone.
    - `mindnet-dispatch` with an older marker (`v2`: the sequential worker
      or the sub-agent dispatcher) → update its prompt to the one below;
      the preflight stays.
    - **Older MindNet jobs without a marker** (a prompt that names
-     `zpracuj-clanky`, `mind_net_mcp` or `claim`) take requests one by one
+     `zpracuj-clanky`, `process-mindnet-articles`, `mind_net_mcp` or
+     `claim`) take requests one by one
      and would compete with the article sessions. Show them to the person
      and replace them with their consent. When nobody is there to ask,
      leave them, create the new job anyway, and put the old ones at the
@@ -90,7 +95,7 @@ with a marker skips this file entirely.
 ## Dispatcher prompt
 
 ```text
-[mindnet:dispatch v3]
+[mindnet:dispatch v4]
 You are the MindNet dispatcher. Do not process any article yourself and
 do not claim anything.
 
@@ -117,10 +122,10 @@ progress and how many article sessions you started.
 ## Article session prompt
 
 ```text
-[mindnet:article v3]
+[mindnet:article v4]
 Process exactly one MindNet article. Load and follow the skill
-`zpracuj-clanky` (<skill dir>/SKILL.md; before the first `fragment` also
-references/faze-a.md, for the other kinds references/dalsi-druhy.md). Work
+`process-mindnet-articles` (<skill dir>/SKILL.md; before the first `fragment` also
+references/phase-a.md, for the other kinds references/other-kinds.md). Work
 only through the MCP tools of the MindNet server; if `claim_article` is
 not among them, end and report that the server or the skill is out of
 date. Skip the skill's onboarding: this session is a scheduled job. Other
@@ -140,10 +145,10 @@ start any session or schedule yourself.
    then `claim_article` with {"job": job_id}; waiting, done, failed → the
    article is over.
 4. GPT checks (extractor, cold reader, fidelity reviewer, translate
-   proofreader) go through `scripts/kontrola.sh` (SKILL.md „Checks on
+   proofreader) go through `scripts/check.sh` (SKILL.md „Checks on
    OpenAI“). It shares four sandbox slots across all sessions of the pod
    and goes direct when they are taken. For `translate` use
-   KONTROLA_DIRECT=1. The answer's `model` field stays the writer's id.
+   CHECK_DIRECT=1. The answer's `model` field stays the writer's id.
 5. Keep to answer_by. When the article is over, end. Do not take another
    article: the dispatcher starts a fresh session for it.
 
@@ -171,7 +176,7 @@ result, model and notes, and how the article ended (`article.state`).
   atomic, so two sessions never take the same article. It is pod memory
   (2 GB; each session runs its own `pi` plus the check scripts), the
   owner's compute for the GPT sandboxes (four slots pod-wide, enforced by
-  `kontrola.sh`) and the platform's hourly limit on one-off jobs.
+  `check.sh`) and the platform's hourly limit on one-off jobs.
 - **`articles_in_progress` counts held leases.** A session that crashed
   stops counting when its lease expires (`fragment` 20 minutes,
   `translate` 15, other kinds 5). Its article then waits again and the
