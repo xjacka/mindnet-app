@@ -1,6 +1,6 @@
 {
   "name": "mindnet",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Your MindNet articles processed by your own Claude: the MindNet MCP server, the article skill and /mindnet:setup for regular runs.",
   "author": {
     "name": "MindNet",
