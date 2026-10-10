@@ -334,7 +334,7 @@ card only in one article.
 | `terms` | `terms.v1` | article terminology for translation: what to do with technical terms by the reader's policy; a glossary for every card of the thread | same — **handle first**, the thread's translations come only after it |
 | `translate` | `translate.v3` (earlier `v2`) | translate a post with its blocks, by the glossary and the terminology policy; answer `{ draft, final }` | same |
 | `summary` | `summary.v2` (earlier `v1`) | two to three sentences „what it is about“ for the reader | same |
-| `file` | `file.v1` | pick one of the reader's existing folders for an article they saved, or none | same |
+| `file` | `file.v1`, `file.v2` | pick one of the reader's existing folders for an article they saved, or none; `file.v2` may also create one new folder | same |
 | `snippet`, `translate-article`, `ask`, `pick`, `compile-instruction`, `suggest-instruction` | as the prompt says | follow the prompt; acceptance rules are there | same |
 | anything else | — | answer by the prompt and note in the report that it is a new kind | |
 

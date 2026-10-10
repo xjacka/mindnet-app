@@ -196,32 +196,49 @@ it is interesting“ is gone — it produced filler. No evaluation, no
 addressing the reader, no questions. For unreadable text or a page that
 is not an article: one sentence about what the page contains.
 
-## `file` — folder for a saved article (`file.v1`, role `light`)
+## `file` — folder for a saved article (`file.v1` or `file.v2`, role `light`)
 
-Only for an article the reader saved themselves and did not file; it
-comes in the same round as `summary`. Input: the reader's folders as
-numbered paths („AI › Agents“) with up to three titles already filed in
-each, and the article's title, site, text type and the main points of its
-cards (not the article text). Output: `{ "subject": "…", "folder": 3,
-"confidence": 0.9, "reason": "…" }`; `folder: 0` = none.
+Only for an article the reader saved themselves and did not file, and only
+when they turned on automatic sorting in their settings; it comes in the
+same round as `summary`. Input: the reader's folders as numbered paths
+(„AI › Agents“) with up to three titles already filed in each, and the
+article's title, site, text type and the main points of its cards (not the
+article text).
+
+Which prompt comes depends on the reader's setting (ADR-0023):
+
+- **`file.v1`** — existing folders only. Output: `{ "subject": "…",
+  "folder": 3, "confidence": 0.9, "reason": "…" }`; `folder: 0` = none.
+  You cannot create a folder.
+- **`file.v2`** — the reader allowed new folders. Output as above plus
+  `"new_folder"`: `null`, or `{ "name": "…", "parent": 2 }` together with
+  `folder: 0` (`parent: 0` = top level). The list may even be empty — the
+  reader has no folders yet.
 
 What the code does with the answer (`fileArticle` in
-`packages/pipeline/src/filing.ts`, ADR-0021):
+`packages/pipeline/src/filing.ts`, ADR-0021, ADR-0023):
 
 | check | consequence |
 |---|---|
 | `folder` not an integer from the list | **silently** nothing is filed |
 | `folder: 0` or `confidence` under **0.7** | nothing is filed, the article stays in the inbox |
+| `new_folder` with `confidence` under **0.8** | no folder is created, the article stays in the inbox |
+| `new_folder.name` longer than 32 characters, `parent` not from the list or deeper than the second level | nothing is created or filed |
+| `new_folder` with the same name as a folder beside it | that existing folder is used |
+| the reader already got five new folders in the last 24 hours | you get `file.v1` instead |
 | the reader filed or unfiled the article meanwhile | your answer is dropped — the hand wins |
 
 The article goes into the folder **straight away**, without the reader
 confirming it; the card in Articles marks it as filed automatically. So
 **a wrong folder is worse than none**: answer 0 when two folders fit
-equally or when nothing holds the article's subject. Decide by the
-subject, not the form — a survey of Rust developers is about Rust, not
-„research“ — and by the example titles more than by the folder name,
-which is the reader's shorthand and may be in another language. You
-cannot create a folder; only the batch „Protřídit“ proposes new ones.
+equally or when nothing holds the article's subject (in `file.v2`: and you
+would not create a folder for it either). Decide by the subject, not the
+form — a survey of Rust developers is about Rust, not „research“ — and by
+the example titles more than by the folder name, which is the reader's
+shorthand and may be in another language. In `file.v2` an existing folder
+always wins over a new one, and a new folder names an area that will hold
+more articles („Rust“, „Sleep“), never this one article, never „Misc“ or
+„To read“.
 
 ## `genre` — text type (`genre.v2`, earlier `genre.v1`; role `light`)
 
