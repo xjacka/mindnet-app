@@ -4,5 +4,9 @@
   "assets": {
     "mindnet-extension.zip": 49652,
     "mindnet.apk": 36495547
+  },
+  "web": {
+    "version": "0.6.1",
+    "updated_at": "2026-10-11T06:33:28Z"
   }
 }
