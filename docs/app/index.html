@@ -32,6 +32,24 @@
         height: 100%;
         flex: 1;
       }
+      /* Posuvníky jen při posouvání, tenké jako na telefonu: na Macu s myší
+         nebo s volbou „posuvníky vždy" jinak stojí trvale vedle feedu.
+         Kontejner, který se právě posouvá, dostane ze skriptu dole
+         atribut data-scrolling a ten posuvník na chvíli zviditelní. */
+      * {
+        scrollbar-width: thin;
+        scrollbar-color: transparent transparent;
+      }
+      [data-scrolling] {
+        scrollbar-color: rgba(128, 128, 128, 0.55) transparent;
+      }
+      /* Safari standardní vlastnosti posuvníku nezná. */
+      @supports not (scrollbar-color: red red) {
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: transparent; border-radius: 4px; }
+        [data-scrolling]::-webkit-scrollbar-thumb { background: rgba(128, 128, 128, 0.55); }
+      }
     </style>
   <link rel="icon" href="/mindnet-app/app/favicon.ico"/></head>
 
@@ -46,12 +64,25 @@
       // Chrome na Androidu nabídne web ve sdílení jen u nainstalované PWA a ta
       // potřebuje service worker. Tenhle jen propouští požadavky dál — nic
       // necachuje, takže vývoj nezmrzne na staré verzi.
+      // Posuvník viditelný jen během posouvání (styl výš). Scroll nebublá,
+      // proto se poslouchá ve fázi capture — chytí každý posuvný kontejner.
+      (function () {
+        var timers = new WeakMap();
+        document.addEventListener('scroll', function (e) {
+          var el = e.target === document ? document.documentElement : e.target;
+          if (!el || !el.setAttribute) return;
+          if (!el.hasAttribute('data-scrolling')) el.setAttribute('data-scrolling', '');
+          clearTimeout(timers.get(el));
+          timers.set(el, setTimeout(function () { el.removeAttribute('data-scrolling'); }, 900));
+        }, { capture: true, passive: true });
+      })();
+
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', function () {
           navigator.serviceWorker.register('sw.js').catch(function () {});
         });
       }
     </script>
-  <script src="/mindnet-app/app/_expo/static/js/web/index-69e41f46d3219d9b17a0d2f8af7c77f7.js" defer></script>
+  <script src="/mindnet-app/app/_expo/static/js/web/index-994129bbed62d4284bd466a205d95459.js" defer></script>
 </body>
 </html>
