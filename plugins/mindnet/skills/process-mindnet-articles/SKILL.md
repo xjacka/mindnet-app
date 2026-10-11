@@ -261,7 +261,7 @@ source can be excluded.
 
 **The prompt is the authority.** Should this skill and `prompt`
 contradict each other, `prompt` wins: it is composed from the current
-version (`prompt_version`, e.g. `fragment.v15-rich-news`) and the
+version (`prompt_version`, e.g. `fragment.v16-rich-news`) and the
 settings the reader has chosen right now. The skill says *why* and *what
 to watch for*, the prompt says *what*. Note a contradiction in the report
 so the skill gets fixed.
@@ -307,8 +307,11 @@ heard — „Habitat“, „Fyxer“, „SWE-bench“. Do not write the explanat
 into the sentence (the card is too short); write it into the mark on the
 name: `[[Habitat|OpenAI's robotics platform for practising household
 tasks]]`. In the app only the name stays in the text and the explanation
-pops up in a tooltip when the reader touches it. This holds in Phase A
-and in the Phase B rewrite, where you **keep** the candidate's marks.
+pops up in a tooltip when the reader touches it. **Every card carries
+its own marks**: the reader sees the cards one at a time, among posts
+from other articles, so a name explained on one card gets the same mark
+again on every other card where it stands. This holds in Phase A and in
+the Phase B rewrite, where you **keep** the candidate's marks.
 Limits and what to explain: [references/phase-a.md](references/phase-a.md).
 
 **The output language is what the prompt says**, not the language of
@@ -327,7 +330,7 @@ card only in one article.
 
 | `kind` | `prompt_version` | What it asks of you | Details |
 |---|---|---|---|
-| `fragment` | `fragment.v15-<style>` / `-<style>-<genre>` (earlier `v14`) | Phase A: a thread that stands in for the article, in the article's language; the answer starts with an `outline`; several rounds with checks | [references/phase-a.md](references/phase-a.md) — read **always** before the first fragment of a run |
+| `fragment` | `fragment.v16-<style>` / `-<style>-<genre>` (earlier `v15`, `v14`) | Phase A: a thread that stands in for the article, in the article's language; the answer starts with an `outline`; several rounds with checks | [references/phase-a.md](references/phase-a.md) — read **always** before the first fragment of a run |
 | `select` | `select.v5` (earlier `v4`, `v3`, `v2`, `v1`) | Phase B: pick from ready candidates for the reader, rewrite into their length and tone, and since v5 say how close each pick is to the reader (`fit`); the prompt is English, the output language is the candidates' | [references/other-kinds.md](references/other-kinds.md) |
 | `portrait` | `portrait.v1` | the reader's portrait: what interests them and what does not, from signals in the app | same |
 | `genre` | `genre.v2` (earlier `v1`) | determine the text type (news, essay, review…); the server composes Phase A by it | same — **handle first**, see below |
@@ -420,7 +423,7 @@ under 0.5 does not reach the feed.
 | meta-description („the article states…“) or a marketing superlative | score −0.15 |
 | the text retells a `bullets`, `quote` or `note` block under it | soft finding, text rewrite |
 | not a single `key_facts` excerpt of the card is found in the article | score −0.15 |
-| third mark on a card, repeated name, broken mark | the mark is silently dropped, the name stays in the text |
+| third mark on a card, a name repeated on the same card, broken mark | the mark is silently dropped, the name stays in the text |
 
 Notice: **the gate does not see an empty card.** A sentence that only
 announces a topic („The study examines the link between sleep and
@@ -453,7 +456,7 @@ in itself. Therefore:
 - **Carry nothing between requests** — not even „this is the same reader,
   last time they wanted it short“. They may have changed it since.
 - Do not rewrite or guess the prompt version; the row carries it and the
-  server caches distillates by it. An unknown version (`fragment.v15-…`)
+  server caches distillates by it. An unknown version (`fragment.v17-…`)
   is not an error — answer by the prompt and note it in the report so the
   skill gets updated.
 - The card examples in the prompt are a model of **structure**, not

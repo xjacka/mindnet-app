@@ -1,6 +1,6 @@
 # Phase A: cards from the article
 
-The whole prompt (`fragment.v15-<style>[-<genre>]`, earlier `v14`) is in
+The whole prompt (`fragment.v16-<style>[-<genre>]`, earlier `v15`, `v14`) is in
 `prompt` and **it carries the rules**: what the thread is for (it stands
 in for the article: core ideas, facts worth remembering, strong quotes,
 context; one new thing per card; the idea opens the card and the
@@ -459,8 +459,10 @@ elements in the text („see below“, „the figure under the text“).
       not a translation.
 - [ ] No datum twice on a card, no thought on two cards.
 - [ ] `note` only where the article says so; otherwise none.
-- [ ] Every name the article introduces has a mark `[[…|…]]` — at most five
-      per card, only at the first occurrence, the note from the article.
+- [ ] Every name the article introduces has a mark `[[…|…]]` on **every
+      card** where it stands, even when another card already explained it —
+      the reader sees each card alone; at most five per card, the note from
+      the article.
 - [ ] Quotes in the thread at most as many as the prompt allows, each
       medium once, blocks within limits.
 - [ ] Output language = the language in the prompt; diacritics complete.

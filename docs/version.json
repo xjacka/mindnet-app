@@ -8,5 +8,9 @@
   "web": {
     "version": "0.6.1",
     "updated_at": "2026-10-11T06:33:28Z"
+  },
+  "plugin": {
+    "version": "0.6.1-2",
+    "updated_at": "2026-10-11T10:33:43Z"
   }
 }
