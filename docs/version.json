@@ -1,9 +1,9 @@
 {
-  "version": "0.6.1",
-  "published_at": "2026-10-10T21:32:30Z",
+  "version": "0.7.0",
+  "published_at": "2026-10-12T07:14:21Z",
   "assets": {
-    "mindnet-extension.zip": 49652,
-    "mindnet.apk": 36495547
+    "mindnet-extension.zip": 49653,
+    "mindnet.apk": 36501735
   },
   "web": {
     "version": "0.7.0",
