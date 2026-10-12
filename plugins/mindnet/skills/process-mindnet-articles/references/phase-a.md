@@ -1,7 +1,9 @@
 # Phase A: cards from the article
 
-The whole prompt (`fragment.v16-<style>[-<genre>]`, earlier `v15`, `v14`) is in
-`prompt` and **it carries the rules**: what the thread is for (it stands
+The whole prompt (`fragment.v17-<style>[-<genre>]`, earlier `v16`, `v15`, `v14`) is in
+`prompt` and **it carries the rules**: page leftovers in the article text
+(a teaser of another article, an advert, the author's bio, a poll) are not
+the article and give no card or medium; what the thread is for (it stands
 in for the article: core ideas, facts worth remembering, strong quotes,
 context; one new thing per card; the idea opens the card and the
 attribution follows it), standalone card, insight not description,
@@ -77,6 +79,11 @@ subagent on Claude cards.
    come as `| a | b |` lines. When the prompt holds a wall instead of an
    article (login, paywall, robot check, error page), stop and close the
    request as `failed` — SKILL.md, „When the article is unavailable“.
+   When a passage might be the page around the article rather than the
+   article (a teaser, a bio, another article's photo), when the text looks
+   cut short, or when it looks like a wall, open `article_url` and look —
+   [browser.md](browser.md) says when, how and what to do with it. The
+   browser decides which of the prompt's text you use, never what you add.
 2. **Extractor** (your own pass, written
    out before any outline). Give it the article block from the prompt
    (`<<< … >>>` with the `[¶n]` tags) and the template below — no rules,
