@@ -1,12 +1,13 @@
 # Phase A: cards from the article
 
-The whole prompt (`fragment.v17-<style>[-<genre>]`, earlier `v16`, `v15`, `v14`) is in
+The whole prompt (`fragment.v18-<style>[-<genre>]`, earlier `v17`, `v16`, `v15`, `v14`) is in
 `prompt` and **it carries the rules**: page leftovers in the article text
 (a teaser of another article, an advert, the author's bio, a poll) are not
 the article and give no card or medium; what the thread is for (it stands
 in for the article: core ideas, facts worth remembering, strong quotes,
 context; one new thing per card; the idea opens the card and the
-attribution follows it), standalone card, insight not description,
+attribution follows it, and who said it is named once per thread),
+standalone card, insight not description,
 concrete subject–verb–object, the `[[name|note]]` mark, the style, the
 text-type module, facts first, blocks, media, examples. Read it whole and
 follow it. This file is what the prompt does not say: the procedure in
@@ -55,6 +56,14 @@ Two more the gate cannot see, from the reader's complaint of 6 October
    first sentence — the gate still wants a name, figure or abbreviation in
    it — it just stops being the subject of „found“. The doer stays in
    front only when the deed is the news (a ban, a launch, a ruling).
+   And it is said **once per thread** (v18, the reader's complaint of
+   23 October 2026: „…, says X“ closed almost every card of a thread):
+   the first card that carries a speaker's claim names them; the cards
+   after it say the idea alone. A later card without the speaker is not a
+   flaw — the same name on card after card is. It stays only where it is
+   the content: a second speaker, the parties of a dispute, the doer whose
+   deed is the news. When dropping it leaves the first sentence without a
+   name or figure, anchor it in the thing the idea is about.
 
 Omitting beats padding even when the thread thereby loses a whole topic.
 `maxFragments` is a ceiling, not a target — and a core idea never falls

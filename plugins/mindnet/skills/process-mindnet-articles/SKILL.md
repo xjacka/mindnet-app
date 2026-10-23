@@ -271,7 +271,7 @@ source can be excluded.
 
 **The prompt is the authority.** Should this skill and `prompt`
 contradict each other, `prompt` wins: it is composed from the current
-version (`prompt_version`, e.g. `fragment.v17-rich-news`) and the
+version (`prompt_version`, e.g. `fragment.v18-rich-news`) and the
 settings the reader has chosen right now. The skill says *why* and *what
 to watch for*, the prompt says *what*. Note a contradiction in the report
 so the skill gets fixed.
@@ -340,7 +340,7 @@ card only in one article.
 
 | `kind` | `prompt_version` | What it asks of you | Details |
 |---|---|---|---|
-| `fragment` | `fragment.v17-<style>` / `-<style>-<genre>` (earlier `v16`, `v15`, `v14`) | Phase A: a thread that stands in for the article, in the article's language; the answer starts with an `outline`; several rounds with checks | [references/phase-a.md](references/phase-a.md) — read **always** before the first fragment of a run |
+| `fragment` | `fragment.v18-<style>` / `-<style>-<genre>` (earlier `v17`, `v16`, `v15`, `v14`) | Phase A: a thread that stands in for the article, in the article's language; the answer starts with an `outline`; several rounds with checks | [references/phase-a.md](references/phase-a.md) — read **always** before the first fragment of a run |
 | `select` | `select.v5` (earlier `v4`, `v3`, `v2`, `v1`) | Phase B: pick from ready candidates for the reader, rewrite into their length and tone, and since v5 say how close each pick is to the reader (`fit`); the prompt is English, the output language is the candidates' | [references/other-kinds.md](references/other-kinds.md) |
 | `portrait` | `portrait.v1` | the reader's portrait: what interests them and what does not, from signals in the app | same |
 | `genre` | `genre.v2` (earlier `v1`) | determine the text type (news, essay, review…); the server composes Phase A by it | same — **handle first**, see below |
@@ -466,7 +466,7 @@ in itself. Therefore:
 - **Carry nothing between requests** — not even „this is the same reader,
   last time they wanted it short“. They may have changed it since.
 - Do not rewrite or guess the prompt version; the row carries it and the
-  server caches distillates by it. An unknown version (`fragment.v17-…`)
+  server caches distillates by it. An unknown version (`fragment.v19-…`)
   is not an error — answer by the prompt and note it in the report so the
   skill gets updated.
 - The card examples in the prompt are a model of **structure**, not
