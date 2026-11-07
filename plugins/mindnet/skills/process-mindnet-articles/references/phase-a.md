@@ -93,6 +93,10 @@ subagent on Claude cards.
    cut short, or when it looks like a wall, open `article_url` and look —
    [browser.md](browser.md) says when, how and what to do with it. The
    browser decides which of the prompt's text you use, never what you add.
+   When `article_url` is documentation or a GitHub repository and the
+   text is not yet a compilation, gather and supply first
+   ([docs-and-repos.md](docs-and-repos.md)); the cards come from the
+   compilation.
 2. **Extractor** (your own pass, written
    out before any outline). Give it the article block from the prompt
    (`<<< … >>>` with the `[¶n]` tags) and the template below — no rules,

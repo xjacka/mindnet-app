@@ -85,7 +85,10 @@ visible. You do not:
 - solve a robot check, change the address, or go to another domain, an
   archive, a search-engine cache or a „reader“ service;
 - follow links away from the article — the next page of the same article
-  is the article, a related article is not.
+  is the article, a related article is not. The one exception is
+  documentation and a code repository, where the article is the relevant
+  pages of that same documentation or repository (and its own docs site
+  or source repository) — [docs-and-repos.md](docs-and-repos.md).
 
 If the article cannot be seen without one of those, it is a wall.
 

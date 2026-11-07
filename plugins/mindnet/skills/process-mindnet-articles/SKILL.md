@@ -260,6 +260,18 @@ in the browser but did not supply. Likewise do not
 fill the missing part from what you know about the topic, and do not
 write cards from the title and lead alone — that is worse than no card.
 
+**When the article is documentation or a repository.** A GitHub
+repository or a page of a documentation site is not one article: the
+reader wants to know what the thing is, what it can do and what it does,
+and that is spread over several pages. Recognise it from `article_url`
+when you claim the article, gather the relevant pages of the same
+documentation or repository while you hold `fragment`, compile them
+copied verbatim into one text and give it with `supply_article`; the
+article starts again from the compilation
+([references/docs-and-repos.md](references/docs-and-repos.md)). An issue,
+a pull request, a release, a blog post or a list of links is a single
+text as usual.
+
 Call `fail` with `permanent: true` and a reason that tells a human what
 happened: „Článek je za přihlášením, v zadání je jen výzva k
 předplatnému.“ Permanent because another attempt ends the same — the
@@ -498,6 +510,9 @@ When everything was fine, the table and one sentence suffice.
 - [references/phase-a.md](references/phase-a.md) — procedure in rounds with
   the three check templates, checklist for cards, styles, block limits,
   the gate step by step.
+- [references/docs-and-repos.md](references/docs-and-repos.md) — a
+  documentation site or a GitHub repository: what counts, which pages to
+  gather, how to compile them verbatim and supply them, the cards.
 - [references/browser.md](references/browser.md) — opening the article
   (`article_url`) in the browser: when, how, what you may do there, and
   what to do with what you saw, including `supply_article`.
